@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.cdqt</groupId>
+    <artifactId>cdqt-night-netty</artifactId>
+    <version>1.1.1.20200605.RELEASE</version>
+  </parent>
+  <artifactId>cdqt-netty-base</artifactId>
+
+  <!-- project properties -->
+  <properties>
+    <netty.version>4.1.50.Final</netty.version>
+    <protostuff.version>1.7.2</protostuff.version>
+    <objenesis.version>3.1</objenesis.version>
+  </properties>
+
+  <!-- dependencies settings -->
+  <dependencies>
+    <!-- core network framework -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+    <!-- serialization framework -->
+    <dependency>
+      <groupId>io.protostuff</groupId>
+      <artifactId>protostuff-core</artifactId>
+      <version>${protostuff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.protostuff</groupId>
+      <artifactId>protostuff-runtime</artifactId>
+      <version>${protostuff.version}</version>
+    </dependency>
+    <!-- instance framework -->
+    <dependency>
+      <groupId>org.objenesis</groupId>
+      <artifactId>objenesis</artifactId>
+      <version>${objenesis.version}</version>
+    </dependency>
+  </dependencies>
+
+  <!-- project build settings -->
+  <build>
+    <!-- final name -->
+    <finalName>cdqt-netty-base</finalName>
+  </build>
+</project>

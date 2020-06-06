@@ -2,22 +2,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <!-- 项目基本信息配置 -->
   <groupId>com.cdqt</groupId>
   <artifactId>cdqt-night-netty</artifactId>
   <version>1.1.1.20200605.RELEASE</version>
   <packaging>pom</packaging>
 
-  <!-- 项目属性配置 -->
+  <!-- project properties -->
   <properties>
-    <!-- Maven编译版本配置 -->
+    <!-- maven compiler properties -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <!-- 项目编码配置 -->
+    <maven.compiler.version>3.7.0</maven.compiler.version>
+    <!-- logback properties -->
+    <logback.version>1.2.3</logback.version>
+    <!-- slf4j properties -->
+    <slf4j.version>1.7.25</slf4j.version>
+    <!-- project build properties -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <!-- 发现依赖和扩展的远程仓库列表 有顺序 -->
+  <!-- dependencies settings -->
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+  </dependencies>
+
+  <!-- project repositories -->
   <repositories>
     <repository>
       <id>aliyun</id>
@@ -31,7 +54,7 @@
     </repository>
   </repositories>
 
-  <!-- 插件依赖和扩展的远程仓库列表 有顺序 -->
+  <!-- plugin repositories -->
   <pluginRepositories>
     <pluginRepository>
       <id>aliyun</id>
@@ -45,20 +68,31 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <!-- 构建配置 -->
+  <!-- project build settings -->
   <build>
-    <!-- 项目构建名称 -->
+    <!-- final name -->
     <finalName>cdqt-night-netty</finalName>
-    <!-- 插件配置 -->
+    <!-- plugins settings -->
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <!-- 跳过测试阶段 -->
+          <!-- skip tests -->
           <skipTests>true</skipTests>
         </configuration>
       </plugin>
+      <!-- maven compiler plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.version}</version>
+      </plugin>
     </plugins>
   </build>
+
+  <!-- subprojects -->
+  <modules>
+    <module>cdqt-netty-base</module>
+  </modules>
 </project>
