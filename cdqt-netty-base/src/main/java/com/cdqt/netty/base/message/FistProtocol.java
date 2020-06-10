@@ -1,6 +1,7 @@
 package com.cdqt.netty.base.message;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import com.cdqt.netty.base.serial.FistSerializable;
 
@@ -128,13 +129,12 @@ public class FistProtocol implements Serializable {
 		return FistSerializable.getInstance().deserialize(content, clazz);
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("FistProtocol=[");
-		sb.append("head=").append(this.head).append(",");
-		sb.append("length=").append(this.length).append(",");
-		sb.append("content=").append(this.content).append("]");
-		return sb.toString();
+		return "FistProtocol [head=" + head + ", length=" + length + ", content=" + Arrays.toString(content) + "]";
 	}
+
 }

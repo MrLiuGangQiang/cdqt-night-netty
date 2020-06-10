@@ -1,6 +1,7 @@
 package com.cdqt.netty.base.message;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import com.cdqt.netty.base.serial.FistUUID;
 
@@ -91,14 +92,12 @@ public class FistMessage implements Serializable {
 		this.content = content;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("SmartMessage=[");
-		sb.append("serial=").append(this.serial).append(",");
-		sb.append("type=").append(this.type).append(",");
-		sb.append("content=").append(this.content).append("]");
-		return sb.toString();
+		return "FistMessage [serial=" + serial + ", type=" + type + ", content=" + Arrays.toString(content) + "]";
 	}
 
 }
