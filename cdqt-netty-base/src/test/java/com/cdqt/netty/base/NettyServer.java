@@ -67,11 +67,11 @@ public class NettyServer {
 
 					@Override
 					public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-						if (++total >= 3) {
+						LOGGER.info("心跳计数---->{}", ++total);
+						if (total >= 5) {
 							LOGGER.info("超过{}个周期未接收到任何数据断开连接", total);
 							ctx.close();
 						}
-						LOGGER.info("心跳计数---->{}", total);
 					}
 				});
 			}

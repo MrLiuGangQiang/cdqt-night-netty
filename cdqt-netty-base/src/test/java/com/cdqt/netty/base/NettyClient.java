@@ -63,14 +63,11 @@ public class NettyClient {
 								LOGGER.info("接收到心跳消息：{}", message);
 								break;
 							}
-							// byte[] data = "im's server".getBytes(Charset.forName("UTF-8"));
-							// ctx.writeAndFlush(new FistProtocol(new
-							// FistMessage(FistMessageType.REQUEST, data)));
 						}
 
 						@Override
 						public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-							ctx.writeAndFlush(new FistProtocol(new FistMessage(FistMessageType.HEARTBEAT, null)));
+							//ctx.writeAndFlush(new FistProtocol(new FistMessage(FistMessageType.HEARTBEAT, null)));
 						}
 					});
 				}
