@@ -8,7 +8,7 @@
   </appender>
 
   <!-- 定义项目名称和日志路径 -->
-  <property name="application.name" value="cdqt-netty-base" />
+  <property name="application.name" value="cdqt-netty-data" />
   <property name="log.path" value="/home/logs" />
 
   <!-- INFO级别日志配置 -->
@@ -71,7 +71,7 @@
     </filter>
   </appender>
   <!-- 特定包日志级别配置 -->
-  <logger name="com.cdqt.netty.base" level="debug" />
+  <logger name="com.cdqt.netty.data" level="debug" />
 
   <!-- 默认,开发环境都输出到控制台 -->
   <root level="info">

@@ -87,5 +87,7 @@
   <!-- subprojects -->
   <modules>
     <module>cdqt-netty-base</module>
+    <module>cdqt-netty-vess</module>
+    <module>cdqt-night-data</module>
   </modules>
 </project>

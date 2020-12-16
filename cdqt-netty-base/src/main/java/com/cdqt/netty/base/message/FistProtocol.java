@@ -1,34 +1,39 @@
 package com.cdqt.netty.base.message;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 import com.cdqt.netty.base.serial.FistSerializable;
 
 /**
- * FistProtocol This Communication Protocol Contain Following Information<br>
- * <code> 
- * +-----------+-------------+------------------+<br>
- * |head(4byte)|length(4byte)|content(unlimited)|<br>
- * +-----------+-------------+------------------+<br>
- * </code>
- *
- * @author LiuGangQiang Create in 2020/06/06
+ * FistProtocol<br>
+ * <code>
+ * +---------------------------------------+--------------------+<br>
+ * |-------------protocol head-------------|--protocol content--|<br>
+ * |-------------------+-------------------+--------------------|<br>
+ * |----head(4byte)----|---length(4byte)---|data(unfixed length)|<br>
+ * |-----0x133ED5B-----|----data length----|--protocol content--|<br>
+ * +-------------------+-------------------+--------------------+<br>
+ *</code>
+ * 
+ * @author LiuGangQiang Create in 2020/12/16
  */
 public class FistProtocol implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
-	 * fist communication protocol default head value default is {@value}
+	 * fist communication protocol default head value is {@value}
 	 *
-	 * @author LiuGangQiang Create in 2020/06/06
+	 * @author LiuGangQiang Create in 2020/12/16
 	 */
 	public static final int HEAD_DEFAULT = 0x133ED5B;
 	/**
 	 * fist communication protocol base data length value is {@value} include <br>
 	 * <code>
-	 * +--------------------+------------------------------+<br>
-	 * |protocol head(4byte)|protocol content length(4byte)|<br>
-	 * +--------------------+------------------------------+<br>
+	 * +---------------------------------------+<br>
+	 * |-------------protocol head-------------|<br>
+	 * |-------------------+-------------------|<br>
+	 * |----head(4byte)----|---length(4byte)---|<br>
+	 * |-----0x133ED5B-----|----data length----|<br>
+	 * +-------------------+-------------------+<br>
 	 *</code>
 	 * 
 	 * @author LiuGangQiang Create in 2020/06/06
@@ -134,7 +139,7 @@ public class FistProtocol implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "FistProtocol [head=" + head + ", length=" + length + ", content=" + Arrays.toString(content) + "]";
+		return "FistProtocol [head=" + head + ", length=" + length + "]";
 	}
 
 }
