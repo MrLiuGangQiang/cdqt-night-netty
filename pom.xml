@@ -12,11 +12,10 @@
     <!-- maven compiler properties -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.version>3.7.0</maven.compiler.version>
     <!-- logback properties -->
     <logback.version>1.2.3</logback.version>
     <!-- slf4j properties -->
-    <slf4j.version>1.7.25</slf4j.version>
+    <slf4j.version>1.7.30</slf4j.version>
     <!-- project build properties -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -81,12 +80,6 @@
           <!-- skip tests -->
           <skipTests>true</skipTests>
         </configuration>
-      </plugin>
-      <!-- maven compiler plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.compiler.version}</version>
       </plugin>
     </plugins>
   </build>
