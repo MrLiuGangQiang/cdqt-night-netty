@@ -6,25 +6,11 @@
     <artifactId>cdqt-night-netty</artifactId>
     <version>1.1.1.20200605.RELEASE</version>
   </parent>
-  <artifactId>cdqt-netty-vess</artifactId>
-
-  <!-- project properties -->
-  <properties>
-  </properties>
-
-  <!-- dependencies settings -->
-  <dependencies>
-    <!-- cdqt-night-base -->
-    <dependency>
-      <groupId>com.cdqt</groupId>
-      <artifactId>cdqt-netty-base</artifactId>
-      <version>1.1.1.20200605.RELEASE</version>
-    </dependency>
-  </dependencies>
+  <artifactId>cdqt-netty-utils</artifactId>
 
   <!-- project build settings -->
   <build>
     <!-- final name -->
-    <finalName>cdqt-netty-vess</finalName>
+    <finalName>cdqt-netty-utils</finalName>
   </build>
 </project>

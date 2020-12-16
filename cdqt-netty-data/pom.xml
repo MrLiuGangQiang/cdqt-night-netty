@@ -6,7 +6,7 @@
     <artifactId>cdqt-night-netty</artifactId>
     <version>1.1.1.20200605.RELEASE</version>
   </parent>
-  <artifactId>cdqt-night-data</artifactId>
+  <artifactId>cdqt-netty-data</artifactId>
 
   <!-- project build settings -->
   <build>

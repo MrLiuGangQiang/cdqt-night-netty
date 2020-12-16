@@ -88,6 +88,7 @@
   <modules>
     <module>cdqt-netty-base</module>
     <module>cdqt-netty-vess</module>
-    <module>cdqt-night-data</module>
+    <module>cdqt-netty-data</module>
+    <module>cdqt-netty-utils</module>
   </modules>
 </project>
