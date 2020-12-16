@@ -1,7 +1,6 @@
 package com.cdqt.netty.base.message;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 import com.cdqt.netty.base.serial.FistUUID;
 
@@ -97,7 +96,7 @@ public class FistMessage implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "FistMessage [serial=" + serial + ", type=" + type + ", content=" + Arrays.toString(content) + "]";
+		return "FistMessage [serial=" + serial + ", type=" + type + "]";
 	}
 
 }

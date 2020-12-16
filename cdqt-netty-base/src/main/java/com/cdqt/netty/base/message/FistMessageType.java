@@ -55,12 +55,29 @@ public enum FistMessageType {
 	 * @author LiuGangQiang Create in 2020/06/06
 	 */
 	public static final byte DEFAULT_TYPE_HEARTBEAT = 0x3;
+	/**
+	 * fist communication protocol message type
+	 *
+	 * @author LiuGangQiang Create in 2020/12/16
+	 */
 	private byte type;
 
+	/**
+	 * FistMessageType
+	 *
+	 * @author LiuGangQiang Create in 2020/12/16
+	 * @param type message type
+	 */
 	private FistMessageType(byte type) {
 		this.type = type;
 	}
 
+	/**
+	 * getByte
+	 *
+	 * @author LiuGangQiang Create in 2020/12/16
+	 * @return {@link Byte}
+	 */
 	public byte getByte() {
 		return type;
 	}

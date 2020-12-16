@@ -5,6 +5,9 @@ import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.cdqt.netty.base.codec.FistCodec;
 import com.cdqt.netty.base.message.FistMessage;
 import com.cdqt.netty.base.message.FistMessageType;
@@ -23,7 +26,9 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 
 public class NettyClient {
-	private void bind(String address, int port) {
+	private final static Logger LOGGER = LoggerFactory.getLogger(NettyClient.class);
+
+	private void bind(String host, int port) {
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			Bootstrap bootstrap = new Bootstrap();
@@ -35,7 +40,7 @@ public class NettyClient {
 				protected void initChannel(Channel ch) throws Exception {
 					ChannelPipeline pipeline = ch.pipeline();
 					pipeline.addLast(new FistCodec());
-					pipeline.addLast(new IdleStateHandler(0, 30, 0, TimeUnit.SECONDS));
+					pipeline.addLast(new IdleStateHandler(0, 10, 0, TimeUnit.SECONDS));
 					pipeline.addLast(new SimpleChannelInboundHandler<FistProtocol>() {
 
 						@Override
@@ -45,18 +50,17 @@ public class NettyClient {
 						}
 
 						@Override
-						protected void channelRead0(ChannelHandlerContext ctx, FistProtocol protocol)
-								throws Exception {
+						protected void channelRead0(ChannelHandlerContext ctx, FistProtocol protocol) throws Exception {
 							FistMessage message = protocol.get(FistMessage.class);
 							switch (message.getType()) {
 							case FistMessageType.DEFAULT_TYPE_REQUEST:
-								System.out.println("接收到请求消息：" + message);
+								LOGGER.info("接收到请求消息：{}", message);
 								break;
 							case FistMessageType.DEFAULT_TYPE_ANSWER:
-								System.out.println("接收到应答消息：" + message);
+								LOGGER.info("接收到应答消息：{}", message);
 								break;
 							case FistMessageType.DEFAULT_TYPE_HEARTBEAT:
-								System.out.println("接收到心跳消息：" + message);
+								LOGGER.info("接收到心跳消息：{}", message);
 								break;
 							}
 							// byte[] data = "im's server".getBytes(Charset.forName("UTF-8"));
@@ -71,7 +75,8 @@ public class NettyClient {
 					});
 				}
 			});
-			ChannelFuture futrue = bootstrap.connect(new InetSocketAddress(address, port)).sync();
+			ChannelFuture futrue = bootstrap.connect(new InetSocketAddress(host, port)).sync();
+			LOGGER.info("客户端启动成功，请求地址[{}:{}]", host, port);
 			futrue.channel().closeFuture().sync();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -81,6 +86,6 @@ public class NettyClient {
 	}
 
 	public static void main(String[] args) throws IOException {
-		new NettyClient().bind("127.0.0.1", 1234);
+		new NettyClient().bind("127.0.0.1", 8888);
 	}
 }
