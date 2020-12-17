@@ -67,7 +67,7 @@ public class NettyClient {
 
 						@Override
 						public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-							//ctx.writeAndFlush(new FistProtocol(new FistMessage(FistMessageType.HEARTBEAT, null)));
+							ctx.writeAndFlush(new FistProtocol(new FistMessage(FistMessageType.HEARTBEAT, null)));
 						}
 					});
 				}
