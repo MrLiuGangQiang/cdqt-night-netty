@@ -1,0 +1,26 @@
+[
+	{
+		"id": "httpsvr",
+		"note": "用于测试http服务",
+		"type": "http",
+		"auto": true
+	},
+	{
+		"id": "tcpsvr",
+		"note": "用于测试tcp服务",
+		"type": "tcp",
+		"auto": true
+	},
+	{
+		"id": "udpsvr",
+		"note": "用于测试udp服务",
+		"type": "udp",
+		"auto": true
+	},
+	{
+		"id": "threadsvr",
+		"note": "用于测试thread服务",
+		"type": "thread",
+		"auto": true
+	}
+]

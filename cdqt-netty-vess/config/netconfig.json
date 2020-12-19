@@ -1,0 +1,34 @@
+[
+	{
+		"id": "httpsvr",
+		"note": "用于测试http服务",
+		"host": "0.0.0.0",
+		"port": 8080,
+		"timeout": 6000,
+		"version": "1.1.1.20201230.RC"
+	},
+	{
+		"id": "tcpsvr",
+		"note": "用于测试tcp服务",
+		"host": "0.0.0.0",
+		"port": 8081,
+		"timeout": 6000,
+		"version": "1.1.1.20201230.RC"
+	},
+	{
+		"id": "udpsvr",
+		"note": "用于测试udp服务",
+		"host": "0.0.0.0",
+		"port": 8082,
+		"timeout": 6000,
+		"version": "1.1.1.20201230.RC"
+	},
+	{
+		"id": "threadsvr",
+		"note": "用于测试thread服务",
+		"jar": "",
+		"clazz": "",
+		"step": 6000,
+		"version": "1.1.1.20201230.RC"
+	}
+]

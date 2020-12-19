@@ -1,0 +1,21 @@
+[
+	{
+		"id": "localbiz",
+		"note": "本地调用",
+		"type": "local",
+		"jar": "rxgaf.comlib.db.jar",
+		"clazz": "rxgaf.comlib.db.service.userservice",
+		"public": true,
+		"version": "v1"
+	},
+	{
+		"id": "remotebiz",
+		"note": "本地调用",
+		"type": "remote",
+		"host": "0.0.0.0",
+		"port": 8080,
+		"url": "httpsvr.localbiz",
+		"public": true,
+		"version": "v1"
+	}
+]

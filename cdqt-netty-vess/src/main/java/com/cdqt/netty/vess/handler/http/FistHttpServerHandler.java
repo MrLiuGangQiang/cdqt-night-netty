@@ -41,7 +41,6 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 	 */
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest msg) throws Exception {
-		LOGGER.info("---------->{}", msg);
 	}
 
 }
