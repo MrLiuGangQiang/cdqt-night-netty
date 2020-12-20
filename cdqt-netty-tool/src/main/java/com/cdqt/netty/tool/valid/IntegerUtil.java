@@ -5,7 +5,7 @@ package com.cdqt.netty.tool.valid;
  *
  * @author LiuGangQiang Create in 2020/03/07
  */
-public class IntegerUtils {
+public class IntegerUtil {
 
 	/**
 	 * 校验Integer是否不等于NULL且大于某个数

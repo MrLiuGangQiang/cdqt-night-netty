@@ -5,7 +5,7 @@ package com.cdqt.netty.tool.valid;
  *
  * @author LiuGangQiang Create in 2020/03/07
  */
-public class ArrayUtils {
+public class ArrayUtil {
 	/**
 	 * 校验数组是否为Null或者无数据
 	 *

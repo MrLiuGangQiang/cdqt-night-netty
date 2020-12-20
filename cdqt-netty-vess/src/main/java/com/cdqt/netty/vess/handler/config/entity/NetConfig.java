@@ -197,4 +197,9 @@ public class NetConfig extends FistBaseEntity {
 		this.step = step;
 	}
 
+	@Override
+	public String toString() {
+		return "id=" + id + ", note=" + note + ", host=" + host + ", port=" + port + ", timeout=" + timeout + ", version=" + version + ", jar=" + jar + ", clazz=" + clazz + ", step=" + step;
+	}
+
 }

@@ -117,4 +117,8 @@ public class SvrConfig extends FistBaseEntity {
 		this.netConfig = netConfig;
 	}
 
+	@Override
+	public String toString() {
+		return "id=" + id + ", note=" + note + ", type=" + type + ", auto=" + auto;
+	}
 }

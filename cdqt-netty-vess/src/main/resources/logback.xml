@@ -72,7 +72,7 @@
   <logger name="com.cdqt.netty.vess" level="debug" />
 
   <!-- 默认、开发环境 输出日志到控制台 -->
-  <root level="info">
+  <root level="debug">
     <appender-ref ref="console" />
     <appender-ref ref="info_file" />
     <appender-ref ref="warn_file" />

@@ -5,7 +5,7 @@ package com.cdqt.netty.tool.valid;
  *
  * @author LiuGangQiang Create in 2020/03/07
  */
-public class StringUtils {
+public class StringUtil {
 	/**
 	 * 空字符串
 	 *
@@ -54,7 +54,7 @@ public class StringUtils {
 	 * @return {@link Boolean} 是否不为NULL且长度大于0
 	 */
 	public static boolean isNotEmpty(String str) {
-		return !StringUtils.isEmpty(str);
+		return !StringUtil.isEmpty(str);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class StringUtils {
 	 * @return {@link Boolean} 是否不为NULL且是否为空字符串
 	 */
 	public static boolean isNotBlank(String str) {
-		return !StringUtils.isBlank(str);
+		return !StringUtil.isBlank(str);
 	}
 
 	/**
