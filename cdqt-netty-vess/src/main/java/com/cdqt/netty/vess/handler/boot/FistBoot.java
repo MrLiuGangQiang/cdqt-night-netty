@@ -51,6 +51,11 @@ public class FistBoot {
 		return this;
 	}
 
+	/**
+	 * 启动服务
+	 *
+	 * @author LiuGangQiang Create in 2020/12/27
+	 */
 	public void start() {
 		register.run();
 	}
