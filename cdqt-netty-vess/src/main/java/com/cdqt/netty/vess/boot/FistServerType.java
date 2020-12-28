@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.handler.boot;
+package com.cdqt.netty.vess.boot;
 
 /**
  * 服务类型枚举

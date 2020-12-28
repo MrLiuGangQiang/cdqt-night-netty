@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.handler.config.entity;
+package com.cdqt.netty.vess.config.entity;
 
 import com.cdqt.netty.base.model.FistBaseEntity;
 

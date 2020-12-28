@@ -1,6 +1,6 @@
 package com.cdqt.netty.vess.handler;
 
-import com.cdqt.netty.vess.handler.boot.FistBoot;
+import com.cdqt.netty.vess.boot.FistBoot;
 
 /**
  * 容器主函数

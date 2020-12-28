@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.handler.config.helper;
+package com.cdqt.netty.vess.config.helper;
 
 import java.io.File;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cdqt.netty.tool.json.JsonFileUtil;
-import com.cdqt.netty.vess.handler.config.entity.BizConfig;
-import com.cdqt.netty.vess.handler.config.entity.SvrConfig;
+import com.cdqt.netty.vess.config.entity.BizConfig;
+import com.cdqt.netty.vess.config.entity.SvrConfig;
 
 /**
  * BizConfigHelper

@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.handler.tools;
+package com.cdqt.netty.vess.tools;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

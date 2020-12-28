@@ -1,6 +1,6 @@
-package com.cdqt.netty.vess.handler.boot;
+package com.cdqt.netty.vess.boot;
 
-import com.cdqt.netty.vess.handler.config.helper.VessConfigHelper;
+import com.cdqt.netty.vess.config.helper.VessConfigHelper;
 
 /**
  * FistBoot
