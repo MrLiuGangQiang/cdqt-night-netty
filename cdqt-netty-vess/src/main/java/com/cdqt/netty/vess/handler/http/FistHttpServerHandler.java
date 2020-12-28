@@ -1,5 +1,8 @@
 package com.cdqt.netty.vess.handler.http;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +24,6 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 		/* 连接完成关闭通道 */
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("channel read complete this channel is closed");
-		}
 		ctx.close();
 	}
 
@@ -32,15 +32,23 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 	 */
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		/* 出现异常返回异常提示 */
-		super.exceptionCaught(ctx, cause);
+		StringWriter sw = new StringWriter();
+		cause.printStackTrace(new PrintWriter(sw, true));
+		if (LOGGER.isErrorEnabled()) {
+			LOGGER.error("Http Server Happen Error [{}]", sw.getBuffer().toString());
+		}
+		// FIXME 出现异常统一处理并输出
+		// FullHttpResponse response = RxResponse.builder().json(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR, Unpooled.wrappedBuffer(cause.getMessage().getBytes()));
+		// ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 	}
 
 	/**
 	 * @see io.netty.channel.SimpleChannelInboundHandler#channelRead0(io.netty.channel.ChannelHandlerContext, java.lang.Object)
 	 */
 	@Override
-	protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest msg) throws Exception {
+	protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
+		System.out.println(request);
+		// FIXME 处理HTTP请求
 	}
 
 }

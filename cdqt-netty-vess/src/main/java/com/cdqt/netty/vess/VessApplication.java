@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.handler;
+package com.cdqt.netty.vess;
 
 import com.cdqt.netty.vess.boot.FistBoot;
 

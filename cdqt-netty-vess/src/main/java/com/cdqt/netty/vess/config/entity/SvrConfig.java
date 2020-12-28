@@ -1,6 +1,9 @@
 package com.cdqt.netty.vess.config.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.cdqt.netty.base.model.FistBaseEntity;
+
+import io.netty.channel.EventLoopGroup;
 
 /**
  * SvrConfig
@@ -40,6 +43,22 @@ public class SvrConfig extends FistBaseEntity {
 	 * @author LiuGangQiang Create in 2020/12/19
 	 */
 	private Boolean auto;
+
+	/**
+	 * 是否运行 默认False<br>
+	 * 不支持反序列化
+	 *
+	 * @author LiuGangQiang Create in 2020/12/28
+	 */
+	@JSONField(deserialize = false)
+	private Boolean run = false;
+
+	/**
+	 * Netty服务线程
+	 *
+	 * @author LiuGangQiang Create in 2020/12/28
+	 */
+	private EventLoopGroup group;
 	/**
 	 * 网络配置
 	 *
@@ -104,6 +123,34 @@ public class SvrConfig extends FistBaseEntity {
 	}
 
 	/**
+	 * @return the run
+	 */
+	public Boolean getRun() {
+		return run;
+	}
+
+	/**
+	 * @param run the run to set
+	 */
+	public void setRun(Boolean run) {
+		this.run = run;
+	}
+
+	/**
+	 * @return the group
+	 */
+	public EventLoopGroup getGroup() {
+		return group;
+	}
+
+	/**
+	 * @param group the group to set
+	 */
+	public void setGroup(EventLoopGroup group) {
+		this.group = group;
+	}
+
+	/**
 	 * @return the netConfig
 	 */
 	public NetConfig getNetConfig() {
@@ -117,8 +164,12 @@ public class SvrConfig extends FistBaseEntity {
 		this.netConfig = netConfig;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "id=" + id + ", note=" + note + ", type=" + type + ", auto=" + auto;
+		return "id=" + id + ", note=" + note + ", type=" + type + ", auto=" + auto + ", run=" + run;
 	}
+
 }

@@ -1,9 +1,9 @@
 package com.cdqt.netty.vess.config.helper;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +25,13 @@ public class VessConfigHelper {
 	 *
 	 * @author LiuGangQiang Create in 2020/12/20
 	 */
-	private static Map<String, SvrConfig> svrConfigMap = new ConcurrentHashMap<String, SvrConfig>();
+	private static Map<String, SvrConfig> svrConfigMap = new LinkedHashMap<String, SvrConfig>();
 	/**
 	 * 网络配置文件集合
 	 *
 	 * @author LiuGangQiang Create in 2020/12/20
 	 */
-	private static Map<String, NetConfig> netConfigMap = new ConcurrentHashMap<String, NetConfig>();
+	private static Map<String, NetConfig> netConfigMap = new LinkedHashMap<String, NetConfig>();
 	/**
 	 * 文件目录分隔符
 	 *

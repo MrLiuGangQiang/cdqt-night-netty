@@ -1,5 +1,9 @@
 package com.cdqt.netty.vess.boot;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.cdqt.netty.vess.config.entity.NetConfig;
 import com.cdqt.netty.vess.config.helper.VessConfigHelper;
 
 /**
@@ -8,7 +12,7 @@ import com.cdqt.netty.vess.config.helper.VessConfigHelper;
  * @author LiuGangQiang Create in 2020/12/27
  */
 public class FistBoot {
-	// private static final Logger LOGGER = LoggerFactory.getLogger(FistBoot.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FistBoot.class);
 	/**
 	 * 服务注册对象
 	 *
@@ -34,18 +38,35 @@ public class FistBoot {
 	public FistBoot load() {
 		/* 遍历所有配置 */
 		VessConfigHelper.getSvrConfig().forEach((id, svr) -> {
-			/* 判断服务类型 */
-			switch (FistServerType.fromString(svr.getType())) {
-			case HTTP:
-				break;
-			case TCP:
-				break;
-			case UDP:
-				break;
-			case WEBSOCKET:
-				break;
-			default:
-				break;
+			/* 判断是否自启动 */
+			if (svr.getAuto()) {
+				/* 获取服务配置 */
+				NetConfig net = svr.getNetConfig();
+				/* 设置服务为已启动 */
+				svr.setRun(true);
+				/* 判断服务类型 */
+				switch (FistServerType.fromString(svr.getType())) {
+				case HTTP:
+					svr.setGroup(register.registerHttpServer(net.getHost(), net.getPort()));
+					break;
+				case TCP:
+					svr.setGroup(register.registerTcpServer(net.getHost(), net.getPort()));
+					break;
+				case UDP:
+					svr.setGroup(register.registerUdpServer(net.getHost(), net.getPort()));
+					break;
+				case WEBSOCKET:
+					svr.setGroup(register.registerWebSocketServer(net.getHost(), net.getPort()));
+					break;
+				case THREAD:
+					// FIXME 这里处理线程服务
+					break;
+				default:
+					if (LOGGER.isWarnEnabled()) {
+						LOGGER.warn("Fist Load Undefined Svr Config [{}]", svr);
+					}
+					break;
+				}
 			}
 		});
 		return this;

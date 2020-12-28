@@ -76,6 +76,7 @@
 
   <!-- 特殊处理 -->
   <logger name="com.cdqt.netty.base" level="debug" />
+  <logger name="com.cdqt.netty.vess" level="debug" />
 
   <!-- 输出控制 -->
   <root level="info">

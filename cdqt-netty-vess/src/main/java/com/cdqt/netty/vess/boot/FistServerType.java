@@ -11,7 +11,7 @@ public enum FistServerType {
 	 *
 	 * @author LiuGangQiang Create in 2020/12/27
 	 */
-	HTTP("httpxx"),
+	HTTP("http"),
 	/**
 	 * TCP
 	 *
