@@ -199,7 +199,7 @@ public class NetConfig extends FistBaseEntity {
 
 	@Override
 	public String toString() {
-		return "id=" + id + ", note=" + note + ", host=" + host + ", port=" + port + ", timeout=" + timeout + ", version=" + version + ", jar=" + jar + ", clazz=" + clazz + ", step=" + step;
+		return "id=" + id + ", note=" + note + ", host=" + host + ", port=" + port + ", timeout=" + timeout + ", jar=" + jar + ", clazz=" + clazz + ", step=" + step;
 	}
 
 }

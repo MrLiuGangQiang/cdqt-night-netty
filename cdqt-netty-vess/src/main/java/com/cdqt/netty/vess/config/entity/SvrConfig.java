@@ -169,7 +169,7 @@ public class SvrConfig extends FistBaseEntity {
 	 */
 	@Override
 	public String toString() {
-		return "id=" + id + ", note=" + note + ", type=" + type + ", auto=" + auto + ", run=" + run;
+		return "id=" + id + ", note=" + note + ", type=" + type + ", auto=" + auto;
 	}
 
 }
