@@ -25,10 +25,8 @@ import io.netty.handler.codec.http.HttpVersion;
 public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FistHttpServerHandler.class);
 
-
-
 	/**
-	 * @see io.netty.channel.ChannelInboundHandlerAdapter#channelReadComplete(io.netty.channel.ChannelHandlerContext) 
+	 * @see io.netty.channel.ChannelInboundHandlerAdapter#channelReadComplete(io.netty.channel.ChannelHandlerContext)
 	 */
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
