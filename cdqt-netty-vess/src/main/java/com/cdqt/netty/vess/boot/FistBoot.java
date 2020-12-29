@@ -3,6 +3,8 @@ package com.cdqt.netty.vess.boot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cdqt.netty.vess.boot.register.FistServerRegister;
+import com.cdqt.netty.vess.boot.register.FistServerType;
 import com.cdqt.netty.vess.config.entity.NetConfig;
 import com.cdqt.netty.vess.config.helper.VessConfigHelper;
 

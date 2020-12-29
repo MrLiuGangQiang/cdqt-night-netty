@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.boot;
+package com.cdqt.netty.vess.boot.register;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
