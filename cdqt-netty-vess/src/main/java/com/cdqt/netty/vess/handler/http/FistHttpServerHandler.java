@@ -6,9 +6,16 @@ import java.io.StringWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cdqt.netty.vess.tools.http.FistHttpResponse;
+
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 
 /**
  * FistHttpServerHandler
@@ -18,13 +25,14 @@ import io.netty.handler.codec.http.FullHttpRequest;
 public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FistHttpServerHandler.class);
 
+
+
 	/**
-	 * @see io.netty.channel.ChannelInboundHandlerAdapter#channelReadComplete(io.netty.channel.ChannelHandlerContext)
+	 * @see io.netty.channel.ChannelInboundHandlerAdapter#channelReadComplete(io.netty.channel.ChannelHandlerContext) 
 	 */
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-		/* 连接完成关闭通道 */
-		ctx.close();
+		ctx.flush();
 	}
 
 	/**
@@ -37,9 +45,9 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("Http Server Happen Error [{}]", sw.getBuffer().toString());
 		}
-		// FIXME 出现异常统一处理并输出
-		// FullHttpResponse response = RxResponse.builder().json(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR, Unpooled.wrappedBuffer(cause.getMessage().getBytes()));
-		// ctx.write(response).addListener(ChannelFutureListener.CLOSE);
+		/* 出现异常统一处理并输出 */
+		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR, Unpooled.wrappedBuffer(cause.getMessage().getBytes()));
+		ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 	}
 
 	/**
@@ -47,8 +55,8 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 	 */
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
-		System.out.println(request);
-		// FIXME 处理HTTP请求
+		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.wrappedBuffer(request.toString().getBytes()));
+		ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 	}
 
 }

@@ -19,6 +19,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpContentCompressor;
@@ -67,13 +68,13 @@ public class FistServerRegister {
 			bootstrap.option(ChannelOption.SO_REUSEADDR, true);
 			/* 设置子通道参数 */
 			bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
-			bootstrap.childHandler(new ChannelInitializer<Channel>() {
+			bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
 				@Override
-				protected void initChannel(Channel ch) throws Exception {
+				protected void initChannel(SocketChannel ch) throws Exception {
 					ChannelPipeline pipeline = ch.pipeline();
 					pipeline.addLast(new HttpServerCodec());
-					pipeline.addLast(new HttpObjectAggregator(Integer.MAX_VALUE));
 					pipeline.addLast(new ChunkedWriteHandler());
+					pipeline.addLast(new HttpObjectAggregator(Integer.MAX_VALUE));
 					pipeline.addLast(new FistHttpServerHandler());
 				}
 			});
@@ -84,7 +85,7 @@ public class FistServerRegister {
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register Http Server Error Message {}", e.toString());
+			LOGGER.error("Register Http Server [{}:{}] Error Message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -127,7 +128,7 @@ public class FistServerRegister {
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register Tcp Server Error Message {}", e.toString());
+			LOGGER.error("Register Tcp Server [{}:{}] Error Message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -174,7 +175,7 @@ public class FistServerRegister {
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register WebSocket Server Error Message {}", e.toString());
+			LOGGER.error("Register WebSocket Server [{}:{}] Error Message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -214,7 +215,7 @@ public class FistServerRegister {
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register Udp Server Error Message {}", e.toString());
+			LOGGER.error("Register Udp Server [{}:{}] Error Message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -230,10 +231,7 @@ public class FistServerRegister {
 				ch.closeFuture().sync();
 			} catch (InterruptedException e) {
 				LOGGER.error("Fist Vess Start UP Error {}", e.toString());
-			} finally {
-				/* 这里释放资源 */
-			}
-
+			} 
 		}
 	}
 }
