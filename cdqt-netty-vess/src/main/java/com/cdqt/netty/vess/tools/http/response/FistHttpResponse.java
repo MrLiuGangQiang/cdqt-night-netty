@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.tools.http;
+package com.cdqt.netty.vess.tools.http.response;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;

@@ -6,7 +6,7 @@ import java.io.StringWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cdqt.netty.vess.tools.http.FistHttpResponse;
+import com.cdqt.netty.vess.tools.http.response.FistHttpResponse;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -53,6 +53,12 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 	 */
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
+		/* 第一步 识别请求地址和请求方法并封装 */
+		/* 第二步 根据请求方法类型处理参数并封装 */
+		/* 第三步 匹配目标Jar和目标方法并动态加载 */
+		/* 第四步 获取目标方法参数和注解等并按需封装参数 */
+		/* 第五步 反射调用方法并处理结果 */
+		/* 第六步 返回统一格式结果给调用者 */
 		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.wrappedBuffer(request.toString().getBytes()));
 		ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 	}
