@@ -44,6 +44,19 @@ public class FistServerRegister {
 	private ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
 	/**
+	 * 主线程 接收请求
+	 *
+	 * @author LiuGangQiang Create in 2020/12/31
+	 */
+	private EventLoopGroup bossGroup = new NioEventLoopGroup();
+	/**
+	 * 工作线程 处理请求
+	 *
+	 * @author LiuGangQiang Create in 2020/12/31
+	 */
+	private EventLoopGroup workerGroup = new NioEventLoopGroup();
+
+	/**
 	 * 注册Http服务
 	 *
 	 * @author LiuGangQiang Create in 2020/12/27
@@ -52,8 +65,6 @@ public class FistServerRegister {
 	 * @return {@link EventLoopGroup}
 	 */
 	public EventLoopGroup registerHttpServer(final String host, final int port) {
-		EventLoopGroup bossGroup = new NioEventLoopGroup();
-		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
 			if (port <= 0 || port > 65535) {
 				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
@@ -99,8 +110,6 @@ public class FistServerRegister {
 	 * @return {@link EventLoopGroup}
 	 */
 	public EventLoopGroup registerTcpServer(final String host, final int port) {
-		EventLoopGroup bossGroup = new NioEventLoopGroup();
-		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
 			if (port <= 0 || port > 65535) {
 				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
@@ -142,8 +151,6 @@ public class FistServerRegister {
 	 * @return {@link EventLoopGroup}
 	 */
 	public EventLoopGroup registerWebSocketServer(final String host, final int port) {
-		EventLoopGroup bossGroup = new NioEventLoopGroup();
-		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
 			if (port <= 0 || port > 65535) {
 				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
@@ -189,13 +196,12 @@ public class FistServerRegister {
 	 * @return {@link EventLoopGroup}
 	 */
 	public EventLoopGroup registerUdpServer(final String host, final int port) {
-		EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			if (port <= 0 || port > 65535)
 				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
 			Bootstrap bootstrap = new Bootstrap();
 			/* 设置Reactor线程 */
-			bootstrap.group(group);
+			bootstrap.group(workerGroup);
 			/* 设置Nio类型的Channel */
 			bootstrap.channel(NioDatagramChannel.class);
 			/* 设置通道参数 */
@@ -231,7 +237,15 @@ public class FistServerRegister {
 				ch.closeFuture().sync();
 			} catch (InterruptedException e) {
 				LOGGER.error("Fist Vess Start UP Error {}", e.toString());
-			} 
+			} finally {
+				/* 优雅处理异常退出 */
+				try {
+					bossGroup.shutdownGracefully().sync();
+					workerGroup.shutdownGracefully().sync();
+				} catch (InterruptedException e) {
+					LOGGER.error("Fist Shutdown Error Message {}", e.toString());
+				}
+			}
 		}
 	}
 }
