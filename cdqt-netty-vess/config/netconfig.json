@@ -3,7 +3,7 @@
 		"id": "httpsvr",
 		"note": "用于测试http服务",
 		"host": "0.0.0.0",
-		"port": 8080,
+		"port": 6666,
 		"timeout": 6000,
 		"version": "1.1.1.20201230.RC"
 	},
@@ -11,7 +11,7 @@
 		"id": "tcpsvr",
 		"note": "用于测试tcp服务",
 		"host": "0.0.0.0",
-		"port": 8081,
+		"port": 7777,
 		"timeout": 6000,
 		"version": "1.1.1.20201230.RC"
 	},
@@ -19,7 +19,7 @@
 		"id": "udpsvr",
 		"note": "用于测试udp服务",
 		"host": "0.0.0.0",
-		"port": 8082,
+		"port": 8888,
 		"timeout": 6000,
 		"version": "1.1.1.20201230.RC"
 	},
