@@ -6,6 +6,10 @@ import java.io.StringWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.cdqt.netty.base.result.ApiStatus;
+import com.cdqt.netty.base.result.ResultApi;
 import com.cdqt.netty.vess.tools.http.response.FistHttpResponse;
 
 import io.netty.buffer.Unpooled;
@@ -59,7 +63,7 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		/* 第四步 获取目标方法参数和注解等并按需封装参数 */
 		/* 第五步 反射调用方法并处理结果 */
 		/* 第六步 返回统一格式结果给调用者 */
-		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.wrappedBuffer(request.toString().getBytes()));
+		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.wrappedBuffer(JSONObject.toJSONString(new ResultApi<>(ApiStatus.OK),SerializerFeature.WriteMapNullValue).getBytes()));
 		ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 	}
 

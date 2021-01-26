@@ -46,5 +46,14 @@
   <build>
     <!-- final name -->
     <finalName>cdqt-netty-base</finalName>
+       <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
 </project>
