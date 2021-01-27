@@ -54,7 +54,7 @@ public class FistHttpUri {
 		}
 		/* 判断格式是否满足要求 */
 		String[] targets = uris[1].split("[.]");
-		if (targets == null || targets.length < 2) {
+		if (targets == null || targets.length != 2) {
 			return false;
 		}
 		return true;
