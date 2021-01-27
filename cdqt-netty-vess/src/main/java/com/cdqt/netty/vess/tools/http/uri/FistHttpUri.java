@@ -38,4 +38,25 @@ public class FistHttpUri {
 		return SingleFistHttpUriHolder.INSTANCE;
 	}
 
+	/**
+	 * 判断地址是否合法
+	 *
+	 * @author LiuGangQiang Create in 2021/01/27
+	 * @param uri 地址
+	 * @return {@link Boolean}
+	 */
+	public boolean judgeUrl(String uri) {
+		/* 拆分URI */
+		String[] uris = uri.substring(1).split("/");
+		/* 判断长度是否满足要求 */
+		if (uris == null || uris.length < 2) {
+			return false;
+		}
+		/* 判断格式是否满足要求 */
+		String[] targets = uris[1].split("[.]");
+		if (targets == null || targets.length < 2) {
+			return false;
+		}
+		return true;
+	}
 }

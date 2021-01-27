@@ -9,7 +9,7 @@ import java.util.Locale;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public class ResultApi<T> implements Serializable {
+public class FistResult<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 默认资源文件路径
@@ -81,7 +81,7 @@ public class ResultApi<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	public ResultApi() {
+	public FistResult() {
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class ResultApi<T> implements Serializable {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code 状态枚举
 	 */
-	public ResultApi(ApiStatus apiStatus) {
+	public FistResult(FistStatus apiStatus) {
 		this.isUseDefault = true;
 		this.isUseMsg = false;
 		this.code = apiStatus.getValue();
@@ -104,7 +104,7 @@ public class ResultApi<T> implements Serializable {
 	 * @param code 状态枚举
 	 * @param data 数据
 	 */
-	public ResultApi(ApiStatus apiStatus, T data) {
+	public FistResult(FistStatus apiStatus, T data) {
 		this.isUseDefault = true;
 		this.isUseMsg = false;
 		this.data = data;
@@ -121,9 +121,9 @@ public class ResultApi<T> implements Serializable {
 
 	/**
 	 * @param code the code to set
-	 * @return {@link ResultApi}
+	 * @return {@link FistResult}
 	 */
-	public ResultApi<T> setCode(Integer code) {
+	public FistResult<T> setCode(Integer code) {
 		this.code = code;
 		return this;
 	}
@@ -137,9 +137,9 @@ public class ResultApi<T> implements Serializable {
 
 	/**
 	 * @param data the data to set
-	 * @return {@link ResultApi}
+	 * @return {@link FistResult}
 	 */
-	public ResultApi<T> setData(T data) {
+	public FistResult<T> setData(T data) {
 		this.data = data;
 		return this;
 	}
@@ -152,18 +152,18 @@ public class ResultApi<T> implements Serializable {
 			return msg;
 		} else {
 			if (this.isUseDefault) {
-				return Prompt.bundle(DEFAULT_PATH, getLocale(), this.key);
+				return FistPrompt.bundle(DEFAULT_PATH, getLocale(), this.key);
 			} else {
-				return Prompt.bundle(getPath(), getLocale(), this.key, this.args);
+				return FistPrompt.bundle(getPath(), getLocale(), this.key, this.args);
 			}
 		}
 	}
 
 	/**
 	 * @param msg the msg to set
-	 * @return {@link ResultApi}
+	 * @return {@link FistResult}
 	 */
-	public ResultApi<T> setMsg(String msg) {
+	public FistResult<T> setMsg(String msg) {
 		this.isUseDefault = false;
 		this.isUseMsg = true;
 		this.msg = msg;
@@ -180,9 +180,9 @@ public class ResultApi<T> implements Serializable {
 
 	/**
 	 * @param locale the locale to set
-	 * @return {@link ResultApi}
+	 * @return {@link FistResult}
 	 */
-	public ResultApi<T> setLocale(Locale locale) {
+	public FistResult<T> setLocale(Locale locale) {
 		this.locale = locale;
 		return this;
 	}
@@ -192,23 +192,23 @@ public class ResultApi<T> implements Serializable {
 	 */
 	@Transient
 	public String getPath() {
-		return path == null ? Prompt.getFilepath() : path;
+		return path == null ? FistPrompt.getFilepath() : path;
 	}
 
 	/**
 	 * @param path the path to set
-	 * @return {@link ResultApi}
+	 * @return {@link FistResult}
 	 */
-	public ResultApi<T> setPath(String path) {
+	public FistResult<T> setPath(String path) {
 		this.path = path;
 		return this;
 	}
 
 	/**
 	 * @param key the key to set
-	 * @return {@link ResultApi}
+	 * @return {@link FistResult}
 	 */
-	public ResultApi<T> setKey(String key) {
+	public FistResult<T> setKey(String key) {
 		this.isUseDefault = false;
 		this.isUseMsg = false;
 		this.key = key;
@@ -218,9 +218,9 @@ public class ResultApi<T> implements Serializable {
 	/**
 	 * @param key  the key to set
 	 * @param args the args to set
-	 * @return {@link ResultApi}
+	 * @return {@link FistResult}
 	 */
-	public ResultApi<T> setKey(String key, Object... args) {
+	public FistResult<T> setKey(String key, Object... args) {
 		this.isUseDefault = false;
 		this.isUseMsg = false;
 		this.args = args;
@@ -243,7 +243,7 @@ public class ResultApi<T> implements Serializable {
 	 * @param code 状态枚举
 	 * @return 是否一致
 	 */
-	public boolean compare(ApiStatus code) {
+	public boolean compare(FistStatus code) {
 		return getCode() == code.getValue();
 	}
 

@@ -8,7 +8,7 @@ import java.util.List;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public class Rows<T> implements Serializable {
+public class FistRows<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -30,7 +30,7 @@ public class Rows<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	public Rows() {
+	public FistRows() {
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Rows<T> implements Serializable {
 	 * @param total 总记录数
 	 * @param rows  数据结果集
 	 */
-	public Rows(long total, List<T> rows) {
+	public FistRows(long total, List<T> rows) {
 		this.total = total;
 		this.rows = rows;
 	}
@@ -57,9 +57,9 @@ public class Rows<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param total 记录总数
-	 * @return {@link Rows}
+	 * @return {@link FistRows}
 	 */
-	public Rows<T> setTotal(Long total) {
+	public FistRows<T> setTotal(Long total) {
 		this.total = total;
 		return this;
 	}
@@ -76,9 +76,9 @@ public class Rows<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param rows 多行记录
-	 * @return {@link Rows}
+	 * @return {@link FistRows}
 	 */
-	public Rows<T> setRows(List<T> rows) {
+	public FistRows<T> setRows(List<T> rows) {
 		this.rows = rows;
 		return this;
 	}

@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public abstract class Prompt {
-	private static final Logger LOGGER = LoggerFactory.getLogger(Prompt.class);
+public abstract class FistPrompt {
+	private static final Logger LOGGER = LoggerFactory.getLogger(FistPrompt.class);
 	/**
 	 * 默认资源文件路径 默认值为 {@value}
 	 *
@@ -27,7 +27,7 @@ public abstract class Prompt {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	private Prompt() {
+	private FistPrompt() {
 	}
 
 	/**

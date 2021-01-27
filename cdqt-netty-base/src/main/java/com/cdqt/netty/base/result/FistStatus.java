@@ -5,7 +5,7 @@ package com.cdqt.netty.base.result;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public enum ApiStatus {
+public enum FistStatus {
 	/**
 	 * 成功状态码
 	 *
@@ -124,7 +124,7 @@ public enum ApiStatus {
 	 * @param value 状态码
 	 * @param key   提示消息
 	 */
-	ApiStatus(int value, String key) {
+	FistStatus(int value, String key) {
 		this.value = value;
 		this.key = key;
 	}
