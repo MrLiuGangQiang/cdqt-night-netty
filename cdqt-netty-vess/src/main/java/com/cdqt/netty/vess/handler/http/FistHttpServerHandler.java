@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.cdqt.netty.base.result.FistResult;
 import com.cdqt.netty.base.result.FistStatus;
-import com.cdqt.netty.vess.target.http.FistHttpTarget;
+import com.cdqt.netty.vess.targets.http.FistHttpTarget;
 import com.cdqt.netty.vess.tools.http.request.FistHttpRequest;
 import com.cdqt.netty.vess.tools.http.response.FistHttpResponse;
 import com.cdqt.netty.vess.tools.http.uri.FistHttpUri;
@@ -83,15 +83,13 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		/* 设置方法类型 */
 		target.setMethod(request.method());
 		/* 设置头部参数 头部参数直接可采用KV都可以采用字符串格式 */
-		target.setHeaders(FistHttpRequest.getInstance().getHeaderParams(request));
+		target.setHeaderParams(FistHttpRequest.getInstance().getHeaderParams(request));
 		/* 设置PATH参数 所有方法都可能带有PATH参数 */
 		target.setPathParams(FistHttpRequest.getInstance().getPathParams(request));
 		/* 设置URL参数 所有方法都可能带有URL参数 */
 		target.setQueryParams(FistHttpRequest.getInstance().getQueryParams(request));
 		/* 设置Body参数 Body参数原则上所有方法都支持，但是大部分框架或工具都过滤掉了GET/DELETE方法的Body参数 所以在这建议只在POST/PUT方法中使用Body传参 */
 		target.setBodyParams(FistHttpRequest.getInstance().getBodyParams(request));
-		
-		
 		/* 第二步 根据请求方法类型处理参数并封装 */
 		/* 第三步 匹配目标Jar和目标方法并动态加载 */
 		/* 第四步 获取目标方法参数和注解等并按需封装参数 */
@@ -99,7 +97,7 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		/* 第六步 返回统一格式结果给调用者 */
 		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.OK,
 				Unpooled.wrappedBuffer(JSONObject.toJSONString(new FistResult<>(FistStatus.OK), SerializerFeature.WriteMapNullValue).getBytes()));
-		ctx.write(response).addListener(ChannelFutureListener.CLOSE);
+		ctx.write(response);
 	}
 
 }
