@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cdqt.netty.base.file.FistFile;
 import com.cdqt.netty.tool.valid.StringUtil;
 
 import io.netty.handler.codec.http.FullHttpRequest;
@@ -16,6 +17,7 @@ import io.netty.handler.codec.http.multipart.Attribute;
 import io.netty.handler.codec.http.multipart.DefaultHttpDataFactory;
 import io.netty.handler.codec.http.multipart.FileUpload;
 import io.netty.handler.codec.http.multipart.HttpPostMultipartRequestDecoder;
+import io.netty.handler.codec.http.multipart.HttpPostRequestDecoder;
 import io.netty.handler.codec.http.multipart.InterfaceHttpData;
 import io.netty.handler.codec.http.multipart.InterfaceHttpData.HttpDataType;
 
@@ -104,31 +106,56 @@ public class FistHttpRequest {
 	 * @throws IOException
 	 */
 	public Map<String, Object> getBodyParams(FullHttpRequest request) throws IOException {
+		Map<String, Object> params = new HashMap<>();
 		/* 获取请求的Content-Type 根据类型决定参数处理方式 */
 		String contentType = request.headers().get(HttpHeaderNames.CONTENT_TYPE);
-		System.out.println(contentType);
 		if (contentType != null && StringUtil.containsIgnoreCase(contentType, HttpHeaderValues.APPLICATION_JSON)) {
 			/* application/json 参数在body内是一个json格式的字符串 */
 			String jsonStr = request.content().toString(Charset.forName("UTF-8"));
-			System.out.println(jsonStr);
+			/* 如果是json不存在key利用hashmap特性可设置key值为null */
+			params.put(null, jsonStr);
 		} else if (contentType != null && StringUtil.containsIgnoreCase(contentType, HttpHeaderValues.MULTIPART_FORM_DATA)) {
 			/* multipart/form-data 类型 参数包含文件 */
 			HttpPostMultipartRequestDecoder decoder = new HttpPostMultipartRequestDecoder(new DefaultHttpDataFactory(false), request);
 			List<InterfaceHttpData> datas = decoder.getBodyHttpDatas();
 			for (InterfaceHttpData data : datas) {
 				if (data.getHttpDataType() == HttpDataType.Attribute) {
+					/* 普通参数类型 用键值对方式存储 */
 					Attribute attribute = (Attribute) data;
-					System.out.println(attribute.getName() + "=" + attribute.getValue());
+					params.put(attribute.getName(), attribute.getValue());
 				} else if (data.getHttpDataType() == HttpDataType.FileUpload) {
+					/* 文件类型 利用 {@link FistFile}存储 */
 					FileUpload upload = (FileUpload) data;
-					System.out.println(upload.getFilename());
+					if (upload.isCompleted()) {
+						FistFile file = new FistFile();
+						String fullName = upload.getFilename();
+						String name = fullName.substring(0, fullName.lastIndexOf("."));
+						String suffix = fullName.substring(fullName.lastIndexOf(".") + 1);
+						file.setFullName(upload.getFilename());
+						file.setName(name);
+						file.setSuffix(suffix);
+						file.setType(upload.getContentType());
+						file.setSize(upload.length());
+						byte[] content = upload.get();
+						file.setContent(content);
+						params.put(upload.getName(), file);
+					}
 				}
 			}
 		} else if (contentType == null || StringUtil.containsIgnoreCase(contentType, HttpHeaderValues.APPLICATION_X_WWW_FORM_URLENCODED)) {
 			/* application/x-www-form-urlencoded类型最原始的传参方式 */
-		}else {
-			/* 其他类型暂时当做字符串处理 */
+			HttpPostRequestDecoder decoder = new HttpPostRequestDecoder(new DefaultHttpDataFactory(false), request);
+			List<InterfaceHttpData> datas = decoder.getBodyHttpDatas();
+			for (InterfaceHttpData data : datas) {
+				if (data.getHttpDataType() == HttpDataType.Attribute) {
+					/* 普通参数类型 用键值对方式存储 */
+					Attribute attribute = (Attribute) data;
+					params.put(attribute.getName(), attribute.getValue());
+				}
+			}
+		} else {
+			/* 其他类型暂时不处理 后期扩展 */
 		}
-		return null;
+		return params;
 	}
 }

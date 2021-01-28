@@ -7,6 +7,20 @@
     <version>1.1.1.20200605.RELEASE</version>
   </parent>
   <artifactId>cdqt-netty-data</artifactId>
+  <!-- dependencies settings -->
+  <dependencies>
+    <!-- cdqt-night-base -->
+    <dependency>
+      <groupId>com.cdqt</groupId>
+      <artifactId>cdqt-netty-base</artifactId>
+      <version>1.1.1.20200605.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>com.cdqt</groupId>
+      <artifactId>cdqt-netty-tool</artifactId>
+      <version>1.1.1.20200605.RELEASE</version>
+    </dependency>
+  </dependencies>
 
   <!-- project build settings -->
   <build>

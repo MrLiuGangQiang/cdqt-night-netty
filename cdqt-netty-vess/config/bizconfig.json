@@ -3,9 +3,8 @@
 		"id": "localbiz",
 		"note": "本地调用",
 		"type": "local",
-		"jar": "rxgaf.comlib.db.jar",
+		"jar": "cdqt-netty-data.jar",
 		"clazz": "rxgaf.comlib.db.service.userservice",
-		"public": true,
 		"version": "v1"
 	},
 	{
@@ -15,7 +14,6 @@
 		"host": "0.0.0.0",
 		"port": 8080,
 		"url": "httpsvr.localbiz",
-		"public": true,
 		"version": "v1"
 	}
 ]
