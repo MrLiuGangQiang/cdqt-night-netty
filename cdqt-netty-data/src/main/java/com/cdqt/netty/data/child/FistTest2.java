@@ -1,4 +1,4 @@
-package com.cdqt.netty.data;
+package com.cdqt.netty.data.child;
 
 import com.cdqt.netty.base.annotation.FistMapping;
 
@@ -8,7 +8,7 @@ import com.cdqt.netty.base.annotation.FistMapping;
  * @author LiuGangQiang Create in 2021/01/28
  */
 @FistMapping({ "fist" })
-public class FistTest {
+public class FistTest2 {
 	@FistMapping({ "test1" })
 	public void test1() {
 	}

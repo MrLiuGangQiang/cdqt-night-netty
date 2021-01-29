@@ -23,6 +23,12 @@ public class FistTarget {
 	 * @author LiuGangQiang Create in 2021/01/27
 	 */
 	private String funName;
+	/**
+	 * 包路径
+	 *
+	 * @author LiuGangQiang Create in 2021/01/29
+	 */
+	private String[] pcks;
 
 	/**
 	 * 构造器
@@ -67,6 +73,20 @@ public class FistTarget {
 	 * @author LiuGangQiang Create in 2021/01/27
 	 */
 	private Map<String, Object> bodyParams;
+
+	/**
+	 * @return the pcks
+	 */
+	public String[] getPcks() {
+		return pcks;
+	}
+
+	/**
+	 * @param pcks the pcks to set
+	 */
+	public void setPcks(String[] pcks) {
+		this.pcks = pcks;
+	}
 
 	/**
 	 * @return the bizName

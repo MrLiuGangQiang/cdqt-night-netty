@@ -4,7 +4,9 @@
 		"note": "本地调用",
 		"type": "local",
 		"jar": "cdqt-netty-data.jar",
-		"clazz": "rxgaf.comlib.db.service.userservice",
+		"pcks": [
+			"com.cdqt.netty.data"
+		],
 		"version": "v1"
 	},
 	{

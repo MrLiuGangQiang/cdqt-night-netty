@@ -60,11 +60,11 @@ public class BizConfig extends FistBaseEntity {
 	 */
 	private String jar;
 	/**
-	 * 类名
+	 * 包路径
 	 *
 	 * @author LiuGangQiang Create in 2021/01/28
 	 */
-	private String clazz;
+	private String[] pcks;
 	/**
 	 * 版本号
 	 *
@@ -171,17 +171,17 @@ public class BizConfig extends FistBaseEntity {
 	}
 
 	/**
-	 * @return the clazz
+	 * @return the pcks
 	 */
-	public String getClazz() {
-		return clazz;
+	public String[] getPcks() {
+		return pcks;
 	}
 
 	/**
-	 * @param clazz the clazz to set
+	 * @param pcks the pcks to set
 	 */
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
+	public void setPcks(String[] pcks) {
+		this.pcks = pcks;
 	}
 
 	/**
@@ -197,13 +197,4 @@ public class BizConfig extends FistBaseEntity {
 	public void setVersion(String version) {
 		this.version = version;
 	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "[id=" + id + ", note=" + note + ", type=" + type + ", jar=" + jar + ", clazz=" + clazz + ", version=" + version + "]";
-	}
-
 }

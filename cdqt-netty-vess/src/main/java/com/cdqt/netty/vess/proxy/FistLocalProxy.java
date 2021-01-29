@@ -1,12 +1,16 @@
 package com.cdqt.netty.vess.proxy;
 
 import java.io.File;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.cdqt.netty.base.result.FistResult;
 import com.cdqt.netty.base.result.FistStatus;
+import com.cdqt.netty.tool.clazz.ClassScanUtil;
 import com.cdqt.netty.tool.valid.StringUtil;
 import com.cdqt.netty.vess.config.entity.BizConfig;
 import com.cdqt.netty.vess.config.helper.BizConfigHelper;
@@ -83,6 +87,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 			LOGGER.warn("The Call Cannot Continue Because BizConfig [{}] Is Null", bizName);
 			return new FistResult<>(FistStatus.ERROR).setKey("fist.bizconfig.is.null", bizName);
 		}
+		target.setPcks(bizConfig.getPcks());
 		/* 判断Jar字段是否为空 */
 		String jar = bizConfig.getJar();
 		if (StringUtil.isBlank(jar)) {
@@ -91,6 +96,23 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 		}
 		/* 获取jar包 */
 		String path = CATALOG + SEPARATOR + PLUGIN + SEPARATOR + jar;
+		try {
+			URL url = new File(path).toURI().toURL();
+			Method add = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+			boolean accessible = add.isAccessible();
+			try {
+				if (!accessible)
+					add.setAccessible(true);
+				URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+				add.invoke(classLoader, url);
+			} finally {
+				add.setAccessible(accessible);
+			}
+			for (String clz : ClassScanUtil.getClassByJar(path, target.getPcks(), true)) {
+				System.out.println(clz);
+			}
+		} catch (Exception e) {
+		}
 		return path;
 	}
 }
