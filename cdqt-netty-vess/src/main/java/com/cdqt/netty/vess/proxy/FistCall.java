@@ -59,8 +59,9 @@ public class FistCall {
 	 * @param <T>    {@link FistTarget}及其子类
 	 * @param target 目标对象
 	 * @return {@link Object}
+	 * @throws Exception 
 	 */
-	public <T extends FistTarget> Object callBiz(T target) {
+	public <T extends FistTarget> Object callBiz(T target) throws Exception {
 		/* 获取通用的业务名称 判断是何种类型决定用何种方式进行调用 */
 		BizConfig bizConfig = BizConfigHelper.getBizConfig(target.getBizName());
 		switch (BizType.fromString(bizConfig==null?null:bizConfig.getType())) {

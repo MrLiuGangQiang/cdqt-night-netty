@@ -70,6 +70,13 @@
           <skipTests>true</skipTests>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <compilerArgument>-parameters</compilerArgument>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 

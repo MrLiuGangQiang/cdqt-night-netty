@@ -24,6 +24,12 @@ public class FistTarget {
 	 */
 	private String funName;
 	/**
+	 * 所在Jar包名
+	 *
+	 * @author LiuGangQiang Create in 2021/01/31
+	 */
+	private String jar;
+	/**
 	 * 包路径
 	 *
 	 * @author LiuGangQiang Create in 2021/01/29
@@ -128,6 +134,20 @@ public class FistTarget {
 	 */
 	public String getFunName() {
 		return funName;
+	}
+
+	/**
+	 * @return the jar
+	 */
+	public String getJar() {
+		return jar;
+	}
+
+	/**
+	 * @param jar the jar to set
+	 */
+	public void setJar(String jar) {
+		this.jar = jar;
 	}
 
 	/**

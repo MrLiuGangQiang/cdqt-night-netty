@@ -1,4 +1,4 @@
-package com.cdqt.netty.base.file;
+package com.cdqt.netty.base.model;
 
 /**
  * 框架文件类

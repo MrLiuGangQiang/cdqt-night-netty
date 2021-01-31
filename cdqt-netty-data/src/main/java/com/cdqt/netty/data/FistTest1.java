@@ -1,5 +1,8 @@
 package com.cdqt.netty.data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.cdqt.netty.base.annotation.FistMapping;
 
 /**
@@ -10,22 +13,16 @@ import com.cdqt.netty.base.annotation.FistMapping;
 @FistMapping({ "fist" })
 public class FistTest1 {
 	@FistMapping({ "test1" })
-	public void test1() {
-		System.out.println("------------->1");
+	public String test1(String name,Long time) {
+		return "Hello Word";
 	}
 
 	@FistMapping({ "test2" })
-	public void test2() {
-		System.out.println("------------->2");
-	}
-
-	@FistMapping({ "test3" })
-	public void test3() {
-		System.out.println("------------->3");
-	}
-
-	@FistMapping({ "test4" })
-	public void test4() {
-		System.out.println("------------->4");
+	public Map<String, Object> test2() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("k1", "v1");
+		map.put("k2", 100);
+		map.put("k3", true);
+		return map;
 	}
 }
