@@ -1,5 +1,6 @@
-package com.cdqt.netty.vess.proxy;
+package com.cdqt.netty.vess.proxy.http;
 
+import com.cdqt.netty.vess.proxy.IFistProxy;
 import com.cdqt.netty.vess.targets.FistTarget;
 
 /**

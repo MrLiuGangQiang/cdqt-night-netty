@@ -7,6 +7,7 @@
 		"pcks": [
 			"com.cdqt.netty.data"
 		],
+		"isergodic": true,
 		"version": "v1"
 	},
 	{

@@ -1,19 +1,20 @@
-package com.cdqt.netty.vess.proxy;
+package com.cdqt.netty.vess.proxy.udp;
 
+import com.cdqt.netty.vess.proxy.IFistProxy;
 import com.cdqt.netty.vess.targets.FistTarget;
 
 /**
- * TCP代理工具
+ * 本地代理工具
  *
  * @author LiuGangQiang Create in 2020/12/31
  */
-public class FistTcpProxy implements IFistProxy<FistTarget> {
+public class FistUdpProxy implements IFistProxy<FistTarget>{
 	/**
 	 * 私有化构造器
 	 *
 	 * @author LiuGangQiang Create in 2020/12/29
 	 */
-	private FistTcpProxy() {
+	private FistUdpProxy() {
 	}
 
 	/**
@@ -21,23 +22,23 @@ public class FistTcpProxy implements IFistProxy<FistTarget> {
 	 *
 	 * @author LiuGangQiang Create in 2020/12/29
 	 */
-	private static class SingleFistTcpProxyHolder {
+	private static class SingleFistLocalProxyHolder {
 		/**
-		 * {@link FistTcpProxy} 静态常量实例
+		 * {@link FistUdpProxy} 静态常量实例
 		 *
 		 * @author LiuGangQiang Create in 2020/12/29
 		 */
-		private static final FistTcpProxy INSTANCE = new FistTcpProxy();
+		private static final FistUdpProxy INSTANCE = new FistUdpProxy();
 	}
 
 	/**
-	 * 获取{@link SingleFistTcpProxyHolder#INSTANCE} 静态常量实例
+	 * 获取{@link SingleFistLocalProxyHolder#INSTANCE} 静态常量实例
 	 *
 	 * @author LiuGangQiang Create in 2020/12/29
-	 * @return {@link SingleFistTcpProxyHolder#INSTANCE} 静态常量实例
+	 * @return {@link SingleFistLocalProxyHolder#INSTANCE} 静态常量实例
 	 */
-	public static FistTcpProxy getInstance() {
-		return SingleFistTcpProxyHolder.INSTANCE;
+	public static FistUdpProxy getInstance() {
+		return SingleFistLocalProxyHolder.INSTANCE;
 	}
 
 	/**

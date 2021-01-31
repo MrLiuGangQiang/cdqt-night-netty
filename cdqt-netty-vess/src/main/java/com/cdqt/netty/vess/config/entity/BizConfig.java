@@ -66,6 +66,12 @@ public class BizConfig extends FistBaseEntity {
 	 */
 	private String[] pcks;
 	/**
+	 * 是否遍历子包
+	 *
+	 * @author LiuGangQiang Create in 2021/01/31
+	 */
+	private Boolean isergodic;
+	/**
 	 * 版本号
 	 *
 	 * @author LiuGangQiang Create in 2021/01/28
@@ -185,6 +191,20 @@ public class BizConfig extends FistBaseEntity {
 	}
 
 	/**
+	 * @return the isergodic
+	 */
+	public Boolean getIsergodic() {
+		return isergodic == null ? false : isergodic;
+	}
+
+	/**
+	 * @param isergodic the isergodic to set
+	 */
+	public void setIsergodic(Boolean isergodic) {
+		this.isergodic = isergodic;
+	}
+
+	/**
 	 * @return the version
 	 */
 	public String getVersion() {
@@ -197,4 +217,5 @@ public class BizConfig extends FistBaseEntity {
 	public void setVersion(String version) {
 		this.version = version;
 	}
+
 }

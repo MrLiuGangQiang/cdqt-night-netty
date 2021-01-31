@@ -31,17 +31,11 @@ public class FistTarget {
 	private String[] pcks;
 
 	/**
-	 * 构造器
+	 * 是否遍历子包
 	 *
-	 * @author LiuGangQiang Create in 2021/01/27
-	 * @param bizName 业务名称
-	 * @param funName 方法名称
+	 * @author LiuGangQiang Create in 2021/01/31
 	 */
-	public FistTarget(String bizName, String funName) {
-		super();
-		this.bizName = bizName;
-		this.funName = funName;
-	}
+	private Boolean isergodic;
 
 	/**
 	 * 请求方法 HTTP适用
@@ -75,6 +69,19 @@ public class FistTarget {
 	private Map<String, Object> bodyParams;
 
 	/**
+	 * 构造器
+	 *
+	 * @author LiuGangQiang Create in 2021/01/27
+	 * @param bizName 业务名称
+	 * @param funName 方法名称
+	 */
+	public FistTarget(String bizName, String funName) {
+		super();
+		this.bizName = bizName;
+		this.funName = funName;
+	}
+
+	/**
 	 * @return the pcks
 	 */
 	public String[] getPcks() {
@@ -93,6 +100,20 @@ public class FistTarget {
 	 */
 	public String getBizName() {
 		return bizName;
+	}
+
+	/**
+	 * @return the isergodic
+	 */
+	public Boolean getIsergodic() {
+		return isergodic;
+	}
+
+	/**
+	 * @param isergodic the isergodic to set
+	 */
+	public void setIsergodic(Boolean isergodic) {
+		this.isergodic = isergodic;
 	}
 
 	/**

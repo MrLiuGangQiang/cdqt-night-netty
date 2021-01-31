@@ -40,7 +40,7 @@ public class ClassScanUtil {
 					JarEntry entry = enumerations.nextElement();
 					String entryName = entry.getName();
 					if (entryName.endsWith(".class")) {
-						classs.add(entryName);
+						classs.add(entryName.replace("/", ".").replace(".class", ""));
 					}
 				}
 			} else {
@@ -55,11 +55,11 @@ public class ClassScanUtil {
 							/* 是否遍历子包 */
 							if (isergodic) {
 								/* 遍历子包直接添加 */
-								classs.add(entryName);
+								classs.add(entryName.replace("/", ".").replace(".class", ""));
 							} else {
 								/* 判断是否属于当前包 */
 								if (!entryName.substring(packagePath.length() + 1).contains("/")) {
-									classs.add(entryName);
+									classs.add(entryName.replace("/", ".").replace(".class", ""));
 								}
 							}
 						}

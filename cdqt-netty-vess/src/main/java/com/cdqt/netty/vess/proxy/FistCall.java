@@ -6,6 +6,11 @@ import org.slf4j.LoggerFactory;
 import com.cdqt.netty.vess.config.entity.BizConfig;
 import com.cdqt.netty.vess.config.helper.BizConfigHelper;
 import com.cdqt.netty.vess.config.helper.BizType;
+import com.cdqt.netty.vess.proxy.http.FistHttpProxy;
+import com.cdqt.netty.vess.proxy.local.FistLocalProxy;
+import com.cdqt.netty.vess.proxy.tcp.FistTcpProxy;
+import com.cdqt.netty.vess.proxy.udp.FistUdpProxy;
+import com.cdqt.netty.vess.proxy.websocket.FistWebsocketProxy;
 import com.cdqt.netty.vess.targets.FistTarget;
 
 /**
