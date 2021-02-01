@@ -1,23 +1,23 @@
-package com.cdqt.netty.base.converters.array;
+package com.cdqt.netty.vess.converters.collection;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.cdqt.netty.base.converters.IFistGenericConverter;
+import com.cdqt.netty.vess.converters.IFistGenericConverter;
 
 /**
- * CollectionToLongConverter
+ * CollectionToDoubleConverter
  *
  * @author LiuGangQiang Create in 2021/02/01
  */
-public class CollectionToLongConverter implements IFistGenericConverter<Long> {
+public class CollectionToDoubleConverter implements IFistGenericConverter<Double> {
 	/**
 	 * 私有化构造器
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
-	private CollectionToLongConverter() {
+	private CollectionToDoubleConverter() {
 	}
 
 	/**
@@ -26,16 +26,16 @@ public class CollectionToLongConverter implements IFistGenericConverter<Long> {
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
 	private static class SingleHolder {
-		private static final CollectionToLongConverter INSTANCE = new CollectionToLongConverter();
+		private static final CollectionToDoubleConverter INSTANCE = new CollectionToDoubleConverter();
 	}
 
 	/**
 	 * 获取类实例
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
-	 * @return {@link CollectionToLongConverter}
+	 * @return {@link CollectionToDoubleConverter}
 	 */
-	public static CollectionToLongConverter getInstance() {
+	public static CollectionToDoubleConverter getInstance() {
 		return SingleHolder.INSTANCE;
 	}
 
@@ -43,18 +43,18 @@ public class CollectionToLongConverter implements IFistGenericConverter<Long> {
 	 * @see com.cdqt.netty.base.converters.IFistGenericConverter#convert(java.lang.Object, java.lang.reflect.Type, java.lang.reflect.Type)
 	 */
 	@Override
-	public Long convert(Object source, Type targetType) {
+	public Double convert(Object source, Type targetType) {
 		if (source instanceof Collection) {
 			Iterator<?> iterator = ((Collection<?>) source).iterator();
 			if (iterator.hasNext()) {
 				Object obj = iterator.next();
 				if (obj == null || "".equals(obj) || "\"\"".equals(obj)) {
-					return targetType == long.class ? 0L : null;
+					return targetType == double.class ? 0D : null;
 				} else {
-					return Long.parseLong(obj.toString());
+					return Double.parseDouble(obj.toString());
 				}
 			}
 		}
-		return null;
+		return targetType == double.class ? 0D : null;
 	}
 }

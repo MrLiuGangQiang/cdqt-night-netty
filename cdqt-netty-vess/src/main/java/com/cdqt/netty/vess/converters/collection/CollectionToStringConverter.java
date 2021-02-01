@@ -1,9 +1,9 @@
-package com.cdqt.netty.base.converters.array;
+package com.cdqt.netty.vess.converters.collection;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-import com.cdqt.netty.base.converters.IFistGenericConverter;
+import com.cdqt.netty.vess.converters.IFistGenericConverter;
 
 /**
  * CollectionToStringConverter

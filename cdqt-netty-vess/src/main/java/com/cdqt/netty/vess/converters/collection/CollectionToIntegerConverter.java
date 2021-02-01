@@ -1,23 +1,23 @@
-package com.cdqt.netty.base.converters.array;
+package com.cdqt.netty.vess.converters.collection;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.cdqt.netty.base.converters.IFistGenericConverter;
+import com.cdqt.netty.vess.converters.IFistGenericConverter;
 
 /**
- * CollectionToBooleanConverter
+ * CollectionToIntegerConverter
  *
  * @author LiuGangQiang Create in 2021/02/01
  */
-public class CollectionToBooleanConverter implements IFistGenericConverter<Boolean> {
+public class CollectionToIntegerConverter implements IFistGenericConverter<Integer> {
 	/**
 	 * 私有化构造器
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
-	private CollectionToBooleanConverter() {
+	private CollectionToIntegerConverter() {
 	}
 
 	/**
@@ -26,16 +26,16 @@ public class CollectionToBooleanConverter implements IFistGenericConverter<Boole
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
 	private static class SingleHolder {
-		private static final CollectionToBooleanConverter INSTANCE = new CollectionToBooleanConverter();
+		private static final CollectionToIntegerConverter INSTANCE = new CollectionToIntegerConverter();
 	}
 
 	/**
 	 * 获取类实例
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
-	 * @return {@link CollectionToBooleanConverter}
+	 * @return {@link CollectionToIntegerConverter}
 	 */
-	public static CollectionToBooleanConverter getInstance() {
+	public static CollectionToIntegerConverter getInstance() {
 		return SingleHolder.INSTANCE;
 	}
 
@@ -43,18 +43,18 @@ public class CollectionToBooleanConverter implements IFistGenericConverter<Boole
 	 * @see com.cdqt.netty.base.converters.IFistGenericConverter#convert(java.lang.Object, java.lang.reflect.Type, java.lang.reflect.Type)
 	 */
 	@Override
-	public Boolean convert(Object source, Type targetType) {
+	public Integer convert(Object source, Type targetType) {
 		if (source instanceof Collection) {
 			Iterator<?> iterator = ((Collection<?>) source).iterator();
 			if (iterator.hasNext()) {
 				Object obj = iterator.next();
 				if (obj == null || "".equals(obj) || "\"\"".equals(obj)) {
-					return targetType == boolean.class ? false : null;
+					return targetType == int.class ? 0 : null;
 				} else {
-					return Boolean.parseBoolean(obj.toString());
+					return Integer.parseInt(obj.toString());
 				}
 			}
 		}
-		return null;
+		return targetType == int.class ? 0 : null;
 	}
 }

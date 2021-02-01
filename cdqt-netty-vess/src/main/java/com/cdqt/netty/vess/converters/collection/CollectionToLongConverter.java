@@ -1,23 +1,23 @@
-package com.cdqt.netty.base.converters.array;
+package com.cdqt.netty.vess.converters.collection;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.cdqt.netty.base.converters.IFistGenericConverter;
+import com.cdqt.netty.vess.converters.IFistGenericConverter;
 
 /**
- * CollectionToByteConverter
+ * CollectionToLongConverter
  *
  * @author LiuGangQiang Create in 2021/02/01
  */
-public class CollectionToByteConverter implements IFistGenericConverter<Byte> {
+public class CollectionToLongConverter implements IFistGenericConverter<Long> {
 	/**
 	 * 私有化构造器
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
-	private CollectionToByteConverter() {
+	private CollectionToLongConverter() {
 	}
 
 	/**
@@ -26,16 +26,16 @@ public class CollectionToByteConverter implements IFistGenericConverter<Byte> {
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
 	private static class SingleHolder {
-		private static final CollectionToByteConverter INSTANCE = new CollectionToByteConverter();
+		private static final CollectionToLongConverter INSTANCE = new CollectionToLongConverter();
 	}
 
 	/**
 	 * 获取类实例
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
-	 * @return {@link CollectionToByteConverter}
+	 * @return {@link CollectionToLongConverter}
 	 */
-	public static CollectionToByteConverter getInstance() {
+	public static CollectionToLongConverter getInstance() {
 		return SingleHolder.INSTANCE;
 	}
 
@@ -43,18 +43,18 @@ public class CollectionToByteConverter implements IFistGenericConverter<Byte> {
 	 * @see com.cdqt.netty.base.converters.IFistGenericConverter#convert(java.lang.Object, java.lang.reflect.Type, java.lang.reflect.Type)
 	 */
 	@Override
-	public Byte convert(Object source, Type targetType) {
+	public Long convert(Object source, Type targetType) {
 		if (source instanceof Collection) {
 			Iterator<?> iterator = ((Collection<?>) source).iterator();
 			if (iterator.hasNext()) {
 				Object obj = iterator.next();
 				if (obj == null || "".equals(obj) || "\"\"".equals(obj)) {
-					return targetType == byte.class ? (byte)0 : null;
+					return targetType == long.class ? 0L : null;
 				} else {
-					return Byte.parseByte(obj.toString());
+					return Long.parseLong(obj.toString());
 				}
 			}
 		}
-		return null;
+		return targetType == long.class ? 0L : null;
 	}
 }

@@ -1,23 +1,23 @@
-package com.cdqt.netty.base.converters.array;
+package com.cdqt.netty.vess.converters.collection;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.cdqt.netty.base.converters.IFistGenericConverter;
+import com.cdqt.netty.vess.converters.IFistGenericConverter;
 
 /**
- * CollectionToCharacterConverter
+ * CollectionToShortConverter
  *
  * @author LiuGangQiang Create in 2021/02/01
  */
-public class CollectionToCharacterConverter implements IFistGenericConverter<Character> {
+public class CollectionToShortConverter implements IFistGenericConverter<Short> {
 	/**
 	 * 私有化构造器
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
-	private CollectionToCharacterConverter() {
+	private CollectionToShortConverter() {
 	}
 
 	/**
@@ -26,16 +26,16 @@ public class CollectionToCharacterConverter implements IFistGenericConverter<Cha
 	 * @author LiuGangQiang Create in 2021/02/01
 	 */
 	private static class SingleHolder {
-		private static final CollectionToCharacterConverter INSTANCE = new CollectionToCharacterConverter();
+		private static final CollectionToShortConverter INSTANCE = new CollectionToShortConverter();
 	}
 
 	/**
 	 * 获取类实例
 	 *
 	 * @author LiuGangQiang Create in 2021/02/01
-	 * @return {@link CollectionToCharacterConverter}
+	 * @return {@link CollectionToShortConverter}
 	 */
-	public static CollectionToCharacterConverter getInstance() {
+	public static CollectionToShortConverter getInstance() {
 		return SingleHolder.INSTANCE;
 	}
 
@@ -43,18 +43,18 @@ public class CollectionToCharacterConverter implements IFistGenericConverter<Cha
 	 * @see com.cdqt.netty.base.converters.IFistGenericConverter#convert(java.lang.Object, java.lang.reflect.Type, java.lang.reflect.Type)
 	 */
 	@Override
-	public Character convert(Object source, Type targetType) {
+	public Short convert(Object source, Type targetType) {
 		if (source instanceof Collection) {
 			Iterator<?> iterator = ((Collection<?>) source).iterator();
 			if (iterator.hasNext()) {
 				Object obj = iterator.next();
 				if (obj == null || "".equals(obj) || "\"\"".equals(obj)) {
-					return null;
+					return targetType == short.class ? (short) 0 : null;
 				} else {
-					return Character.valueOf(obj.toString().charAt(0));
+					return Short.parseShort(obj.toString());
 				}
 			}
 		}
-		return null;
+		return targetType == short.class ? (short) 0 : null;
 	}
 }
