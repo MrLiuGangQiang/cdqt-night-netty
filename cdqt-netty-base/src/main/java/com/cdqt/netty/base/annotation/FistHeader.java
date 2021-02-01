@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author LiuGangQiang Create in 2021/01/31
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ ElementType.PARAMETER })
 public @interface FistHeader {
 	/**
 	 * 头部参数名
@@ -19,5 +19,5 @@ public @interface FistHeader {
 	 * @author LiuGangQiang Create in 2021/01/28
 	 * @return {@link String}
 	 */
-	String value() default "";
+	String value();
 }

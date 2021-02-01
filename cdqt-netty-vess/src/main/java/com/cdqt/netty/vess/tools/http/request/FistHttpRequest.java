@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cdqt.netty.base.model.FistFile;
-import com.cdqt.netty.tool.valid.StringUtil;
+import com.cdqt.netty.tool.common.StringUtil;
 
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpHeaderNames;

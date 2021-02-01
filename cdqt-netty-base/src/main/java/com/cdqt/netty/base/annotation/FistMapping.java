@@ -19,6 +19,6 @@ public @interface FistMapping {
 	 * @author LiuGangQiang Create in 2021/01/28
 	 * @return {@link String[]}
 	 */
-	String[] value() default {};
+	String[] value();
 	
 }

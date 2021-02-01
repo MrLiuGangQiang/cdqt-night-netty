@@ -53,7 +53,7 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 			LOGGER.error("Http Server Happen Error [{}]", sw.getBuffer().toString());
 		}
 		/* 出现异常统一处理并输出 */
-		FistResult<?> result = new FistResult<>(FistStatus.ERROR).setMsg(cause.getMessage());
+		FistResult<?> result = new FistResult<>(FistStatus.ERROR).setMsg(cause.toString());
 		String resultStr = JSONObject.toJSONString(result, SerializerFeature.WriteMapNullValue);
 		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR, Unpooled.wrappedBuffer(resultStr.getBytes()));
 		ctx.write(response).addListener(ChannelFutureListener.CLOSE);

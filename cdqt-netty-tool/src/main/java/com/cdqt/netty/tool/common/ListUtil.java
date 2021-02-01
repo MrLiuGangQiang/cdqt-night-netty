@@ -1,4 +1,4 @@
-package com.cdqt.netty.tool.valid;
+package com.cdqt.netty.tool.common;
 
 import java.util.List;
 
