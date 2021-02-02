@@ -123,7 +123,18 @@ public class FistHttpRequest {
 				if (data.getHttpDataType() == HttpDataType.Attribute) {
 					/* 普通参数类型 用键值对方式存储 */
 					Attribute attribute = (Attribute) data;
-					params.put(attribute.getName(), attribute.getValue());
+					String key = attribute.getName();
+					/* 判断是否已存在同名文件 */
+					if (params.containsKey(key)) {
+						@SuppressWarnings("unchecked")
+						ArrayList<String> attributes = (ArrayList<String>) params.get(key);
+						attributes.add(attribute.getValue());
+						params.put(key, attributes);
+					} else {
+						ArrayList<String> attributes = new ArrayList<>();
+						attributes.add(attribute.getValue());
+						params.put(key, attributes);
+					}
 				} else if (data.getHttpDataType() == HttpDataType.FileUpload) {
 					/* 文件类型 利用 {@link FistFile}存储 */
 					FileUpload upload = (FileUpload) data;
@@ -162,7 +173,18 @@ public class FistHttpRequest {
 				if (data.getHttpDataType() == HttpDataType.Attribute) {
 					/* 普通参数类型 用键值对方式存储 */
 					Attribute attribute = (Attribute) data;
-					params.put(attribute.getName(), attribute.getValue());
+					String key = attribute.getName();
+					/* 判断是否已存在同名文件 */
+					if (params.containsKey(key)) {
+						@SuppressWarnings("unchecked")
+						ArrayList<String> attributes = (ArrayList<String>) params.get(key);
+						attributes.add(attribute.getValue());
+						params.put(key, attributes);
+					} else {
+						ArrayList<String> attributes = new ArrayList<>();
+						attributes.add(attribute.getValue());
+						params.put(key, attributes);
+					}
 				}
 			}
 		} else {

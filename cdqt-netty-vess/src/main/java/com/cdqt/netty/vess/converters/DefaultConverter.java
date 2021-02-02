@@ -42,7 +42,7 @@ public class DefaultConverter implements IFistGenericConverter<Object> {
 	 */
 	@Override
 	public Object convert(Object source, Type targetType) {
-		if (source.getClass()!=targetType) {
+		if (source.getClass() != targetType) {
 			throw new FistRuntimeException("Fist Converter {0} Error Because Type Error", targetType);
 		}
 		return source;

@@ -120,7 +120,7 @@ public class FistConverterFactory {
 				/* 集合转Character */
 				return CollectionToCharacterConverter.getInstance();
 			}
-			System.out.println(targetType.getTypeName());
+			System.out.println(FistBaseFile.class.isAssignableFrom((Class<?>) targetType));
 		} else if (Map.class.isAssignableFrom(sourceType)) {
 			if (FistBaseEntity.class.isAssignableFrom((Class<?>) targetType)) {
 				/* 集合转实体类 */

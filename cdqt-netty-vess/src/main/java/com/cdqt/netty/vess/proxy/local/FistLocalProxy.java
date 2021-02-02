@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,9 +42,6 @@ import com.cdqt.netty.vess.targets.FistTarget;
  */
 public class FistLocalProxy implements IFistProxy<FistTarget> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FistLocalProxy.class);
-
-	private static final Class<?>[] CACHED_COMMON_TYPES = { boolean.class, Boolean.class, byte.class, Byte.class, char.class, Character.class, double.class, Double.class, float.class, Float.class, int.class, Integer.class, long.class,
-			Long.class, short.class, Short.class, String.class, Date.class };
 	/**
 	 * 分割符
 	 *
@@ -156,7 +152,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 				Type parameterType = parameter.getParameterizedType();
 				/* 判断参数是否是Header参数 */
 				FistHeader header = parameter.getDeclaredAnnotation(FistHeader.class);
-				if (header != null && isBaseType(parameterType)) {
+				if (header != null) {
 					/* 注解不等于NULL表示参数是Header参数 */
 					String headerParam = target.getHeaderParams().get(header.value());
 					if (StringUtil.isBlank(headerParam)) {
@@ -169,7 +165,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 				}
 				/* 判断参数是否是Query参数 */
 				FistQuery query = parameter.getDeclaredAnnotation(FistQuery.class);
-				if (query != null && isBaseType(parameterType) && !query.isBody()) {
+				if (query != null && !query.isBody()) {
 					/* 注解不等于NULL表示参数是Query参数 */
 					Object queryParam = target.getQueryParams().get(query.value());
 					if (queryParam == null) {
@@ -179,10 +175,10 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 						params.add(FistConverterFactory.getConverter(parameterType, queryParam.getClass()).convert(queryParam, parameterType));
 						continue;
 					}
-				}else if(query != null && isBaseType(parameterType) && query.isBody()) {
+				} else if (query != null && query.isBody()) {
 					Object bodyParam = target.getBodyParams().get(query.value());
 					if (bodyParam == null) {
-						throw new FistRuntimeException("Fist Encapsulation Body Parameter [{0}] Error",query.value());
+						throw new FistRuntimeException("Fist Encapsulation Body Parameter [{0}] Error", query.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(parameterType, bodyParam.getClass()).convert(bodyParam, parameterType));
@@ -216,7 +212,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					}
 				}
 				/* 如果都没有参数注解则考虑普通对象参数封装 */
-				if (!isBaseType(parameterType) && FistBaseEntity.class.isAssignableFrom((Class<?>) parameterType)) {
+				if (FistBaseEntity.class.isAssignableFrom((Class<?>) parameterType)) {
 					/* 参数是实体对象 */
 					Object queryParam = target.getQueryParams();
 					if (queryParam == null) {
@@ -294,21 +290,5 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 			}
 			return bizMethods.get(bizName + DIVISION + funName);
 		}
-	}
-
-	/**
-	 * 判断是否是框架基本类型
-	 *
-	 * @author LiuGangQiang Create in 2021/02/02
-	 * @param type 目标类型
-	 * @return {@link Boolean}
-	 */
-	private boolean isBaseType(Type type) {
-		for (Class<?> clazz : CACHED_COMMON_TYPES) {
-			if (clazz == type) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

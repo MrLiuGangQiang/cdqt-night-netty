@@ -21,8 +21,15 @@ public class ConverterTest {
 	}
 
 	@FistMapping("converterArray")
-	public String[] converterArray(@FistQuery("param") String[] param) {
-		return param;
+	public String converterArray(@FistQuery("param1") String[] param1, @FistQuery(value = "param2", isBody = true) String[] param2) {
+		StringBuffer sb=new StringBuffer();
+		for (String param : param1) {
+			sb.append(param).append(">");
+		}
+		for (String param : param2) {
+			sb.append(param).append(">");
+		}
+		return sb.toString();
 	}
 
 	@FistMapping("converterString")
@@ -99,9 +106,8 @@ public class ConverterTest {
 	public String converterFiles(@FistQuery(value = "param", isBody = true) String param, @FistFile("file") FistBaseFile[] file) {
 		StringBuffer sb = new StringBuffer();
 		for (FistBaseFile fistBaseFile : file) {
-			sb.append(fistBaseFile.toString()).append(">>");
+			sb.append(fistBaseFile.toString()).append("<>");
 		}
-		return param + ">>" + sb.toString();
+		return param + "<>" + sb.toString();
 	}
-
 }
