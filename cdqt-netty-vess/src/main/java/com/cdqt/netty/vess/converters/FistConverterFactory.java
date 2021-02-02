@@ -13,6 +13,7 @@ import com.cdqt.netty.vess.converters.collection.CollectionToByteConverter;
 import com.cdqt.netty.vess.converters.collection.CollectionToCharacterConverter;
 import com.cdqt.netty.vess.converters.collection.CollectionToDateConverter;
 import com.cdqt.netty.vess.converters.collection.CollectionToDoubleConverter;
+import com.cdqt.netty.vess.converters.collection.CollectionToFistBaseFileConverter;
 import com.cdqt.netty.vess.converters.collection.CollectionToFolatConverter;
 import com.cdqt.netty.vess.converters.collection.CollectionToIntegerConverter;
 import com.cdqt.netty.vess.converters.collection.CollectionToLongConverter;
@@ -119,8 +120,10 @@ public class FistConverterFactory {
 			} else if (targetType == Character.class) {
 				/* 集合转Character */
 				return CollectionToCharacterConverter.getInstance();
-			}
-			System.out.println(FistBaseFile.class.isAssignableFrom((Class<?>) targetType));
+			}else if (FistBaseFile.class.isAssignableFrom((Class<?>) targetType)) {
+				/* 文件类型 */
+				return CollectionToFistBaseFileConverter.getInstance();
+			} 
 		} else if (Map.class.isAssignableFrom(sourceType)) {
 			if (FistBaseEntity.class.isAssignableFrom((Class<?>) targetType)) {
 				/* 集合转实体类 */
