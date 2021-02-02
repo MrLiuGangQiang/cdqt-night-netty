@@ -13,6 +13,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cdqt.netty.base.annotation.FistBody;
+import com.cdqt.netty.base.annotation.FistFile;
 import com.cdqt.netty.base.annotation.FistHeader;
 import com.cdqt.netty.base.annotation.FistMapping;
 import com.cdqt.netty.base.annotation.FistQuery;
@@ -26,9 +28,9 @@ import com.cdqt.netty.tool.common.ListUtil;
 import com.cdqt.netty.tool.common.StringUtil;
 import com.cdqt.netty.vess.config.entity.BizConfig;
 import com.cdqt.netty.vess.config.helper.BizConfigHelper;
+import com.cdqt.netty.vess.converters.FistConverterFactory;
 import com.cdqt.netty.vess.proxy.IFistProxy;
 import com.cdqt.netty.vess.targets.FistTarget;
-import com.cdqt.netty.vess.tools.ClassHelper;
 
 /**
  * 本地代理工具
@@ -149,10 +151,10 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是Header参数 */
 					String headerParam = target.getHeaderParams().get(header.value());
 					if (StringUtil.isBlank(headerParam)) {
-						throw new FistRuntimeException("Fist Encapsulation Header Parameter [{0}] Error ", header.value());
+						throw new FistRuntimeException("Fist Encapsulation Header Parameter [{0}] Error", header.value());
 					} else {
 						/* 设置参数 */
-						params.add(ClassHelper.change(parameter.getParameterizedType(), headerParam));
+						params.add(FistConverterFactory.getConverter(parameter.getParameterizedType(), headerParam.getClass()).convert(headerParam, parameter.getParameterizedType()));
 						continue;
 					}
 				}
@@ -162,10 +164,36 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是Query参数 */
 					Object queryParam = target.getQueryParams().get(query.value());
 					if (queryParam == null) {
-						throw new FistRuntimeException("Fist Encapsulation Query Parameter [{0}] Error ", query.value());
+						throw new FistRuntimeException("Fist Encapsulation Query Parameter [{0}] Error", query.value());
 					} else {
 						/* 设置参数 */
-						params.add(ClassHelper.change(parameter.getParameterizedType(), queryParam));
+						params.add(FistConverterFactory.getConverter(parameter.getParameterizedType(), queryParam.getClass()).convert(queryParam, parameter.getParameterizedType()));
+						continue;
+					}
+				}
+				/* 判断参数是否是Body参数 */
+				FistBody body = parameter.getDeclaredAnnotation(FistBody.class);
+				if (body != null) {
+					/* 注解不等于NULL表示参数是Body参数 */
+					Object bodyParam = target.getBodyParams().get(null);
+					if (bodyParam == null) {
+						throw new FistRuntimeException("Fist Encapsulation Body Parameter Error");
+					} else {
+						/* 设置参数 */
+						params.add(FistConverterFactory.getConverter(parameter.getParameterizedType(), bodyParam.getClass()).convert(bodyParam, parameter.getParameterizedType()));
+						continue;
+					}
+				}
+				/* 判断参数是否是File参数 */
+				FistFile file = parameter.getDeclaredAnnotation(FistFile.class);
+				if (file != null) {
+					/* 注解不等于NULL表示参数是File参数 */
+					Object fileParam = target.getBodyParams().get(file.value());
+					if (fileParam == null) {
+						throw new FistRuntimeException("Fist Encapsulation File [{0}] Parameter Error", file.value());
+					} else {
+						/* 设置参数 */
+						params.add(FistConverterFactory.getConverter(parameter.getParameterizedType(), fileParam.getClass()).convert(fileParam, parameter.getParameterizedType()));
 						continue;
 					}
 				}

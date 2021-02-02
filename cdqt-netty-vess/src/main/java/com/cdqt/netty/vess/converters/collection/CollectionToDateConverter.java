@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import com.cdqt.netty.base.exception.FistRuntimeException;
 import com.cdqt.netty.vess.converters.IFistGenericConverter;
 
 /**
@@ -43,7 +44,7 @@ public class CollectionToDateConverter implements IFistGenericConverter<Date> {
 	}
 
 	/**
-	 * @throws ParseException 
+	 * @throws ParseException
 	 * @see com.cdqt.netty.base.converters.IFistGenericConverter#convert(java.lang.Object, java.lang.reflect.Type, java.lang.reflect.Type)
 	 */
 	@Override
@@ -56,7 +57,11 @@ public class CollectionToDateConverter implements IFistGenericConverter<Date> {
 				if (obj == null || "".equals(obj) || "\"\"".equals(obj)) {
 					return null;
 				} else {
-					return sf.parse(obj.toString());
+					try {
+						return sf.parse(obj.toString());
+					} catch (Exception e) {
+						throw new FistRuntimeException("Fist Converter [{0}] To Date Error：{1}", obj,e.getMessage()) ;
+					}
 				}
 			}
 		}
