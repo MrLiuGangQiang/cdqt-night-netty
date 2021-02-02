@@ -2,9 +2,12 @@ package com.cdqt.netty.data;
 
 import java.util.Date;
 
+import com.cdqt.netty.base.annotation.FistBody;
+import com.cdqt.netty.base.annotation.FistFile;
 import com.cdqt.netty.base.annotation.FistHeader;
 import com.cdqt.netty.base.annotation.FistMapping;
 import com.cdqt.netty.base.annotation.FistQuery;
+import com.cdqt.netty.base.model.FistBaseFile;
 
 /**
  * ConverterTest
@@ -28,7 +31,7 @@ public class ConverterTest {
 	}
 
 	@FistMapping("converterDate")
-	public Date converterDate(@FistQuery("param") Date param) {
+	public Date converterDate(@FistQuery(value = "param", isBody = true) Date param) {
 		return param;
 	}
 
@@ -71,4 +74,25 @@ public class ConverterTest {
 	public String converterShort(@FistQuery("param1") Short param1, @FistQuery("param2") short param2) {
 		return "Short:" + param1 + " short:" + param2;
 	}
+
+	@FistMapping("converterBody")
+	public User converterBody(@FistBody User user) {
+		return user;
+	}
+
+	@FistMapping("converterEntity")
+	public User converterEntity(User user) {
+		return user;
+	}
+
+	@FistMapping("converterEntityError")
+	public User2 converterEntityError(User2 user) {
+		return user;
+	}
+
+	@FistMapping("converterFile")
+	public String converterFile(@FistQuery(value = "param", isBody = true) String param, @FistFile("file") FistBaseFile file) {
+		return param+">>"+file.toString();
+	}
+
 }

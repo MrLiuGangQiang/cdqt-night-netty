@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
  * @author LiuGangQiang Create in 2021/01/31
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ ElementType.PARAMETER })
 public @interface FistBody {
 }

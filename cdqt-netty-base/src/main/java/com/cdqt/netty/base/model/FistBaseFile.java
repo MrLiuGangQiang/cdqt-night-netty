@@ -5,7 +5,7 @@ package com.cdqt.netty.base.model;
  *
  * @author LiuGangQiang Create in 2021/01/28
  */
-public class FistFile {
+public class FistBaseFile {
 	/**
 	 * 文件全名
 	 *
@@ -127,4 +127,13 @@ public class FistFile {
 	public void setContent(byte[] content) {
 		this.content = content;
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[fullName=" + fullName + ", name=" + name + ", suffix=" + suffix + ", size=" + size + ", type=" + type + "]";
+	}
+
 }

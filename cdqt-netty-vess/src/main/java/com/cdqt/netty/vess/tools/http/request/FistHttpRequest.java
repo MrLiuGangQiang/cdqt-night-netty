@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.cdqt.netty.base.model.FistFile;
+import com.cdqt.netty.base.model.FistBaseFile;
 import com.cdqt.netty.tool.common.StringUtil;
 
 import io.netty.handler.codec.http.FullHttpRequest;
@@ -127,7 +127,7 @@ public class FistHttpRequest {
 					/* 文件类型 利用 {@link FistFile}存储 */
 					FileUpload upload = (FileUpload) data;
 					if (upload.isCompleted()) {
-						FistFile file = new FistFile();
+						FistBaseFile file = new FistBaseFile();
 						String fullName = upload.getFilename();
 						String name = fullName.substring(0, fullName.lastIndexOf("."));
 						String suffix = fullName.substring(fullName.lastIndexOf(".") + 1);
