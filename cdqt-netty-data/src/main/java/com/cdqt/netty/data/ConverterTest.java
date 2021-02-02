@@ -92,7 +92,16 @@ public class ConverterTest {
 
 	@FistMapping("converterFile")
 	public String converterFile(@FistQuery(value = "param", isBody = true) String param, @FistFile("file") FistBaseFile file) {
-		return param+">>"+file.toString();
+		return param + ">>" + file.toString();
+	}
+
+	@FistMapping("converterFiles")
+	public String converterFiles(@FistQuery(value = "param", isBody = true) String param, @FistFile("file") FistBaseFile[] file) {
+		StringBuffer sb = new StringBuffer();
+		for (FistBaseFile fistBaseFile : file) {
+			sb.append(fistBaseFile.toString()).append(">>");
+		}
+		return param + ">>" + sb.toString();
 	}
 
 }

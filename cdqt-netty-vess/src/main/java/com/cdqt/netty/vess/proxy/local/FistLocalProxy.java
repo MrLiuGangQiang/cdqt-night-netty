@@ -150,7 +150,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 		if (ArrayUtil.isNotEmpty(parameters)) {
 			/* 定义变量存储参数 */
 			List<Object> params = new ArrayList<>();
-			/* 循环封装参数 */
+			/* 循环遍历目标方法参数 */
 			for (Parameter parameter : parameters) {
 				/* 获取目标参数类型 */
 				Type parameterType = parameter.getParameterizedType();
@@ -182,7 +182,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 				}else if(query != null && isBaseType(parameterType) && query.isBody()) {
 					Object bodyParam = target.getBodyParams().get(query.value());
 					if (bodyParam == null) {
-						throw new FistRuntimeException("Fist Encapsulation Body Parameter Error");
+						throw new FistRuntimeException("Fist Encapsulation Body Parameter [{0}] Error",query.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(parameterType, bodyParam.getClass()).convert(bodyParam, parameterType));

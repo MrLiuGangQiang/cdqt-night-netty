@@ -94,8 +94,9 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		target.setBodyParams(FistHttpRequest.getInstance().getBodyParams(request));
 		/* 反射调用方法并处理结果 */
 		Object result = FistCall.getInstance().callBiz(target);
+		String resultStr = JSONObject.toJSONString(result, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
 		/* 返回结果给调用者 */
-		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.wrappedBuffer(JSONObject.toJSONString(result, SerializerFeature.WriteMapNullValue,SerializerFeature.WriteDateUseDateFormat).getBytes()));
+		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.wrappedBuffer(resultStr.getBytes()));
 		ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 	}
 

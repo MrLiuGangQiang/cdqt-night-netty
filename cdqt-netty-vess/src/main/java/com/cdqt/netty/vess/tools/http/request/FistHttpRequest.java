@@ -2,6 +2,7 @@ package com.cdqt.netty.vess.tools.http.request;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -138,7 +139,18 @@ public class FistHttpRequest {
 						file.setSize(upload.length());
 						byte[] content = upload.get();
 						file.setContent(content);
-						params.put(upload.getName(), file);
+						String key = upload.getName();
+						/* 判断是否已存在同名文件 */
+						if (params.containsKey(key)) {
+							@SuppressWarnings("unchecked")
+							List<FistBaseFile> files = (List<FistBaseFile>) params.get(key);
+							files.add(file);
+							params.put(key, files);
+						} else {
+							ArrayList<FistBaseFile> files = new ArrayList<>();
+							files.add(file);
+							params.put(key, files);
+						}
 					}
 				}
 			}
