@@ -49,7 +49,7 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		 * StringWriter sw = new StringWriter(); cause.printStackTrace(new PrintWriter(sw, true));
 		 */
 		if (LOGGER.isErrorEnabled()) {
-			LOGGER.error("http server happen error [{}]", cause.getMessage());
+			LOGGER.error("http server happen error : {}", cause.getMessage());
 		}
 		/* 出现异常统一处理并输出 */
 		FistResult<?> result = new FistResult<>(FistStatus.ERROR).setMsg(cause.getMessage());

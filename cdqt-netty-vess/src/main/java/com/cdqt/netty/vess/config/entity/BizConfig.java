@@ -223,7 +223,7 @@ public class BizConfig extends FistBaseEntity {
 	 */
 	@Override
 	public String toString() {
-		return "[id=" + id + ", note=" + note + ", type=" + type + ", version=" + version + "]";
+		return "id=" + id + ", note=" + note + ", type=" + type + ", version=" + version;
 	}
 
 }
