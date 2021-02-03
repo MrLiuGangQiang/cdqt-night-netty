@@ -156,7 +156,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是Header参数 */
 					String headerParam = target.getHeaderParams().get(header.value());
 					if (StringUtil.isBlank(headerParam)) {
-						throw new FistException("framework encapsulation header parameter [{0}] error", header.value());
+						throw new FistException("framework encapsulation {0}:{1} header parameter [{2}] error", entity.getClass().getTypeName(), method.getName(), header.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, headerParam.getClass()).convert(headerParam, targetType));
@@ -169,7 +169,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是Query参数 */
 					Object queryParam = target.getQueryParams().get(query.value());
 					if (queryParam == null) {
-						throw new FistException("framework encapsulation query parameter [{0}] error", query.value());
+						throw new FistException("framework encapsulation {0}:{1} query parameter [{2}] error", entity.getClass().getTypeName(), method.getName(), query.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, queryParam.getClass()).convert(queryParam, targetType));
@@ -182,7 +182,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是Body参数 */
 					Object bodyParam = target.getBodyParams().get(StringUtil.isBlank(body.value()) ? null : body.value());
 					if (bodyParam == null) {
-						throw new FistException("framework encapsulation body parameter [{0}] error", body.value());
+						throw new FistException("framework encapsulation {0}:{1} body parameter [{2}] error", entity.getClass().getTypeName(), method.getName(), body.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, bodyParam.getClass()).convert(bodyParam, targetType));
@@ -195,7 +195,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是File参数 */
 					Object fileParam = target.getBodyParams().get(file.value());
 					if (fileParam == null) {
-						throw new FistException("framework encapsulation file [{0}] parameter error", file.value());
+						throw new FistException("framework encapsulation {0}:{1} file parameter [{2}] error", entity.getClass().getTypeName(), method.getName(), file.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, fileParam.getClass()).convert(fileParam, targetType));
@@ -207,7 +207,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 参数是实体对象 */
 					Object queryParam = target.getQueryParams();
 					if (queryParam == null) {
-						throw new FistException("framework encapsulation entity parameter error");
+						throw new FistException("framework encapsulation {0}:{1} entity parameter error", entity.getClass().getTypeName(), method.getName());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, queryParam.getClass()).convert(queryParam, targetType));

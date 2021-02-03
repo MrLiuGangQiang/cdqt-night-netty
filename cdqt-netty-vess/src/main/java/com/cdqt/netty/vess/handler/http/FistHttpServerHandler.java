@@ -1,7 +1,5 @@
 package com.cdqt.netty.vess.handler.http;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.URLDecoder;
 
 import org.slf4j.Logger;
@@ -47,13 +45,14 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 	 */
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		StringWriter sw = new StringWriter();
-		cause.printStackTrace(new PrintWriter(sw, true));
+		/*
+		 * StringWriter sw = new StringWriter(); cause.printStackTrace(new PrintWriter(sw, true));
+		 */
 		if (LOGGER.isErrorEnabled()) {
-			LOGGER.error("http server happen error [{}]", sw.getBuffer().toString());
+			LOGGER.error("http server happen error [{}]", cause.getMessage());
 		}
 		/* 出现异常统一处理并输出 */
-		FistResult<?> result = new FistResult<>(FistStatus.ERROR).setMsg(cause.toString());
+		FistResult<?> result = new FistResult<>(FistStatus.ERROR).setMsg(cause.getMessage());
 		String resultStr = JSONObject.toJSONString(result, SerializerFeature.WriteMapNullValue);
 		FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR, Unpooled.wrappedBuffer(resultStr.getBytes()));
 		ctx.write(response).addListener(ChannelFutureListener.CLOSE);
