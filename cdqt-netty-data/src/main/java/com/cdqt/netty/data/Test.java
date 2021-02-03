@@ -9,24 +9,19 @@ import com.cdqt.netty.base.annotation.FistMapping;
 import com.cdqt.netty.base.annotation.FistQuery;
 import com.cdqt.netty.base.model.FistBaseFile;
 
-/**
- * ConverterTest
- *
- * @author LiuGangQiang Create in 2021/02/02
- */
-public class ConverterTest {
+public class Test {
 	@FistMapping("converterHeader")
-	public String converterHeader(@FistHeader("param") String param) {
-		return param;
+	public String converterHeader(@FistHeader("header") String header) {
+		return header;
 	}
 
 	@FistMapping("converterArray")
-	public String converterArray(@FistQuery("param1") String[] param1, @FistBody(value = "param2") String[] param2) {
-		StringBuffer sb=new StringBuffer();
-		for (String param : param1) {
+	public String converterArray(@FistQuery("array1") String[] array1, @FistBody(value = "array2") String[] array2) {
+		StringBuffer sb = new StringBuffer();
+		for (String param : array1) {
 			sb.append(param).append(">");
 		}
-		for (String param : param2) {
+		for (String param : array2) {
 			sb.append(param).append(">");
 		}
 		return sb.toString();
@@ -38,33 +33,33 @@ public class ConverterTest {
 	}
 
 	@FistMapping("converterDate")
-	public Date converterDate(@FistBody(value = "param") Date param) {
-		return param;
+	public Date converterDate(@FistBody(value = "date") Date date) {
+		return date;
 	}
 
 	@FistMapping("converterCharacter")
-	public Character converterCharacter(@FistQuery("param") Character param) {
-		return param;
+	public Character converterCharacter(@FistQuery("character") Character character) {
+		return character;
 	}
 
 	@FistMapping("converterInteger")
-	public String converterInteger(@FistQuery("param1") Integer param1, @FistQuery("param2") int param2) {
-		return "Integer:" + param1 + " int:" + param2;
+	public String converterInteger(@FistQuery("num1") Integer num1, @FistQuery("num2") int num2) {
+		return "Integer:" + num1 + " int:" + num2;
 	}
 
 	@FistMapping("converterDouble")
-	public String converterDouble(@FistQuery("param1") Double param1, @FistQuery("param2") double param2) {
-		return "Double:" + param1 + " double:" + param2;
+	public String converterDouble(@FistQuery("num1") Double num1, @FistQuery("num2") double num2) {
+		return "Double:" + num1 + " double:" + num2;
 	}
 
 	@FistMapping("converterFloat")
-	public String converterFloat(@FistQuery("param1") Float param1, @FistQuery("param2") float param2) {
-		return "Float:" + param1 + " float:" + param2;
+	public String converterFloat(@FistQuery("num1") Float num1, @FistQuery("num2") float num2) {
+		return "Float:" + num1 + " float:" + num2;
 	}
 
 	@FistMapping("converterLong")
-	public String converterLong(@FistQuery("param1") Long param1, @FistQuery("param2") long param2) {
-		return "Long:" + param1 + " long:" + param2;
+	public String converterLong(@FistQuery("num1") Long num1, @FistQuery("num2") long num2) {
+		return "Long:" + num1 + " long:" + num2;
 	}
 
 	@FistMapping("converterBoolean")
@@ -92,22 +87,23 @@ public class ConverterTest {
 		return user;
 	}
 
-	@FistMapping("converterEntityError")
-	public User2 converterEntityError(User2 user) {
-		return user;
-	}
-
 	@FistMapping("converterFile")
 	public String converterFile(@FistBody(value = "param") String param, @FistFile("file") FistBaseFile file) {
-		return param + ">>" + file.toString();
+		return "parameter:" + param + " file:" + file.toString();
 	}
 
 	@FistMapping("converterFiles")
-	public String converterFiles(@FistBody(value = "param") String param, @FistFile("file") FistBaseFile[] file) {
-		StringBuffer sb = new StringBuffer();
-		for (FistBaseFile fistBaseFile : file) {
-			sb.append(fistBaseFile.toString()).append("<>");
+	public String converterFiles(@FistBody(value = "param") String param, @FistFile("file") FistBaseFile[] files) {
+		StringBuffer sb = new StringBuffer("parameter:");
+		sb.append(param);
+		for (FistBaseFile file : files) {
+			sb.append(file.toString()).append(">>>");
 		}
-		return param + "<>" + sb.toString();
+		return sb.toString();
+	}
+
+	@FistMapping("converterEmpty")
+	public String converterEntity(String param) {
+		return param;
 	}
 }

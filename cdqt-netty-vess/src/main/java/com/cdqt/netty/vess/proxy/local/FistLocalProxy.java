@@ -214,6 +214,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 						continue;
 					}
 				}
+				throw new FistException("framework encapsulation {0}:{1} entity parameter error", entity.getClass().getTypeName(), method.getName());
 			}
 			if (IntegerUtil.isEq(parameters.length, params.size())) {
 				return method.invoke(entity, params.toArray());

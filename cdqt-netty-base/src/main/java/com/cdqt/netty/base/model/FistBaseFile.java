@@ -133,7 +133,7 @@ public class FistBaseFile {
 	 */
 	@Override
 	public String toString() {
-		return "[fullName=" + fullName + ", name=" + name + ", suffix=" + suffix + ", size=" + size + ", type=" + type + "]";
+		return "fullName=" + fullName + ", name=" + name + ", suffix=" + suffix + ", size=" + size + ", type=" + type;
 	}
 
 }
