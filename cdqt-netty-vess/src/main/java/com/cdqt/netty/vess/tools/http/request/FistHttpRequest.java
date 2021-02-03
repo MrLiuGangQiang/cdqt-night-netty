@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.cdqt.netty.base.model.FistBaseFile;
 import com.cdqt.netty.tool.common.StringUtil;
 
@@ -28,6 +31,8 @@ import io.netty.handler.codec.http.multipart.InterfaceHttpData.HttpDataType;
  * @author LiuGangQiang Create in 2020/12/31
  */
 public class FistHttpRequest {
+	private static final Logger LOGGER = LoggerFactory.getLogger(FistHttpRequest.class);
+
 	/**
 	 * 私有化构造器
 	 *
@@ -188,7 +193,7 @@ public class FistHttpRequest {
 				}
 			}
 		} else {
-			/* 其他类型暂时不处理 后期扩展 */
+			LOGGER.warn("Fist Temporary Not Support Content-Type:{} Request", contentType);
 		}
 		return params;
 	}

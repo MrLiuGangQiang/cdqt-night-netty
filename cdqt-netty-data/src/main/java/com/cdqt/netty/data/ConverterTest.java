@@ -21,7 +21,7 @@ public class ConverterTest {
 	}
 
 	@FistMapping("converterArray")
-	public String converterArray(@FistQuery("param1") String[] param1, @FistQuery(value = "param2", isBody = true) String[] param2) {
+	public String converterArray(@FistQuery("param1") String[] param1, @FistBody(value = "param2") String[] param2) {
 		StringBuffer sb=new StringBuffer();
 		for (String param : param1) {
 			sb.append(param).append(">");
@@ -38,7 +38,7 @@ public class ConverterTest {
 	}
 
 	@FistMapping("converterDate")
-	public Date converterDate(@FistQuery(value = "param", isBody = true) Date param) {
+	public Date converterDate(@FistBody(value = "param") Date param) {
 		return param;
 	}
 
@@ -98,12 +98,12 @@ public class ConverterTest {
 	}
 
 	@FistMapping("converterFile")
-	public String converterFile(@FistQuery(value = "param", isBody = true) String param, @FistFile("file") FistBaseFile file) {
+	public String converterFile(@FistBody(value = "param") String param, @FistFile("file") FistBaseFile file) {
 		return param + ">>" + file.toString();
 	}
 
 	@FistMapping("converterFiles")
-	public String converterFiles(@FistQuery(value = "param", isBody = true) String param, @FistFile("file") FistBaseFile[] file) {
+	public String converterFiles(@FistBody(value = "param") String param, @FistFile("file") FistBaseFile[] file) {
 		StringBuffer sb = new StringBuffer();
 		for (FistBaseFile fistBaseFile : file) {
 			sb.append(fistBaseFile.toString()).append("<>");

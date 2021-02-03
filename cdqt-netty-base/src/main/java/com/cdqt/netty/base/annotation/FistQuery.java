@@ -20,12 +20,4 @@ public @interface FistQuery {
 	 * @return {@link String}
 	 */
 	String value();
-
-	/**
-	 * 参数是否在body内
-	 *
-	 * @author LiuGangQiang Create in 2021/02/02
-	 * @return {@link Boolean}
-	 */
-	boolean isBody() default false;
 }

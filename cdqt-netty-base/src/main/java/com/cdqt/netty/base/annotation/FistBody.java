@@ -13,4 +13,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER })
 public @interface FistBody {
+	/**
+	 * 参数名
+	 *
+	 * @author LiuGangQiang Create in 2021/01/28
+	 * @return {@link String}
+	 */
+	String value() default "";
 }
