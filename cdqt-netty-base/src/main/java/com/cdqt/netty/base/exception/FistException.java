@@ -7,7 +7,7 @@ import java.text.MessageFormat;
  *
  * @author LiuGangQiang Create in 2020/10/21
  */
-public class FistRuntimeException extends RuntimeException {
+public class FistException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -17,7 +17,7 @@ public class FistRuntimeException extends RuntimeException {
 	 * @param message 异常消息
 	 * @param args    不定参数
 	 */
-	public FistRuntimeException(String message, Object... args) {
+	public FistException(String message, Object... args) {
 		super(MessageFormat.format(message, args));
 	}
 
@@ -27,7 +27,7 @@ public class FistRuntimeException extends RuntimeException {
 	 * @author LiuGangQiang Create in 2020/10/21
 	 * @param message 异常消息
 	 */
-	public FistRuntimeException(String message) {
+	public FistException(String message) {
 		super(message);
 	}
 
@@ -36,7 +36,7 @@ public class FistRuntimeException extends RuntimeException {
 	 *
 	 * @author LiuGangQiang Create in 2020/10/21
 	 */
-	public FistRuntimeException() {
+	public FistException() {
 		super();
 	}
 }

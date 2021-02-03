@@ -139,7 +139,7 @@ public class FistProtocol implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "FistProtocol [head=" + head + ", length=" + length + "]";
+		return "[head=" + head + ", length=" + length + "]";
 	}
 
 }

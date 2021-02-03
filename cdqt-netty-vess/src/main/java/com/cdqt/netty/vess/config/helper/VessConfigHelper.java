@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cdqt.netty.base.exception.FistException;
 import com.cdqt.netty.tool.json.JsonFileUtil;
 import com.cdqt.netty.vess.config.entity.NetConfig;
 import com.cdqt.netty.vess.config.entity.SvrConfig;
@@ -79,10 +80,10 @@ public class VessConfigHelper {
 		List<SvrConfig> svrConfigList = JSONObject.parseArray(svrConfigStr, SvrConfig.class);
 		svrConfigList.forEach(svr -> {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Read {} Configuration [{}]", SVR_CONFIG_PATH, svr);
+				LOGGER.debug("read {} configuration [{}]", SVR_CONFIG_PATH, svr);
 			}
 			if (svrConfigMap.containsKey(svr.getId())) {
-				throw new RuntimeException("Server Configuration " + svr.getId() + " Repeat");
+				throw new FistException("server configuration [{0}] repeat", svr.getId());
 			}
 			svr.setNetConfig(getNetConfig(svr.getId()));
 			svrConfigMap.put(svr.getId(), svr);
@@ -100,10 +101,10 @@ public class VessConfigHelper {
 		List<NetConfig> netConfigList = JSONObject.parseArray(netConfigStr, NetConfig.class);
 		netConfigList.forEach(net -> {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Read {} Configuration [{}]", NET_CONFIG_PATH, net);
+				LOGGER.debug("read {} configuration [{}]", NET_CONFIG_PATH, net);
 			}
 			if (svrConfigMap.containsKey(net.getId())) {
-				throw new RuntimeException("Server Configuration " + net.getId() + " Repeat");
+				throw new FistException("server configuration {0} repeat", net.getId());
 			}
 			netConfigMap.put(net.getId(), net);
 		});

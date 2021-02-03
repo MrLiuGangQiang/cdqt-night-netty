@@ -61,11 +61,10 @@ public class FistBoot {
 					svr.setGroup(register.registerWebSocketServer(net.getHost(), net.getPort()));
 					break;
 				case THREAD:
-					// FIXME 这里处理线程服务
 					break;
 				default:
 					if (LOGGER.isWarnEnabled()) {
-						LOGGER.warn("Fist Load Undefined Svr Config [{}]", svr);
+						LOGGER.warn("framework server [{}] not support [{}] protocol", svr.getId(), svr.getType());
 					}
 					break;
 				}

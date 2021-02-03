@@ -1,6 +1,6 @@
 package com.cdqt.netty.vess.proxy;
 
-import com.cdqt.netty.vess.targets.FistTarget;
+import com.cdqt.netty.vess.config.entity.FistTarget;
 
 /**
  * 代理接口

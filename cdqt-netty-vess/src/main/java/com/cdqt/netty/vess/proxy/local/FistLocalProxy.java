@@ -19,21 +19,21 @@ import com.cdqt.netty.base.annotation.FistFile;
 import com.cdqt.netty.base.annotation.FistHeader;
 import com.cdqt.netty.base.annotation.FistMapping;
 import com.cdqt.netty.base.annotation.FistQuery;
-import com.cdqt.netty.base.exception.FistRuntimeException;
+import com.cdqt.netty.base.exception.FistException;
 import com.cdqt.netty.base.model.FistBaseEntity;
 import com.cdqt.netty.base.model.FistMethod;
 import com.cdqt.netty.base.result.FistResult;
 import com.cdqt.netty.base.result.FistStatus;
-import com.cdqt.netty.tool.clazz.ClassScanUtil;
 import com.cdqt.netty.tool.common.ArrayUtil;
 import com.cdqt.netty.tool.common.IntegerUtil;
 import com.cdqt.netty.tool.common.ListUtil;
 import com.cdqt.netty.tool.common.StringUtil;
 import com.cdqt.netty.vess.config.entity.BizConfig;
+import com.cdqt.netty.vess.config.entity.FistTarget;
 import com.cdqt.netty.vess.config.helper.BizConfigHelper;
 import com.cdqt.netty.vess.converters.FistConverterFactory;
 import com.cdqt.netty.vess.proxy.IFistProxy;
-import com.cdqt.netty.vess.targets.FistTarget;
+import com.cdqt.netty.vess.tools.clazz.ClassScanUtil;
 
 /**
  * 本地代理工具
@@ -113,7 +113,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 
 	/**
 	 * @throws Exception
-	 * @see com.cdqt.netty.vess.proxy.IFistProxy#call(com.cdqt.netty.vess.targets.FistTarget)
+	 * @see com.cdqt.netty.vess.proxy.IFistProxy#call(com.cdqt.netty.vess.config.entity.FistTarget)
 	 */
 	@Override
 	public Object call(FistTarget target) throws Exception {
@@ -122,13 +122,13 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 		BizConfig bizConfig = BizConfigHelper.getBizConfig(bizName);
 		/* 判断配置是否为空 为空则提示 */
 		if (bizConfig == null) {
-			LOGGER.warn("The Call Cannot Continue Because BizConfig [{}] Is Null", bizName);
+			LOGGER.warn("the call cannot continue because bizconfig [{}] is null", bizName);
 			return new FistResult<>(FistStatus.ERROR).setKey("fist.bizconfig.is.null", bizName);
 		}
 		/* 判断Jar字段是否为空 */
 		String jar = bizConfig.getJar();
 		if (StringUtil.isBlank(jar)) {
-			LOGGER.warn("The Call Cannot Continue Because BizConfig [{}] Jar Filed Is Null", bizName);
+			LOGGER.warn("the call cannot continue because bizconfig [{}] jar filed is null", bizName);
 			return new FistResult<>(FistStatus.ERROR).setKey("fist.bizconfig.jar.is.empty", bizName);
 		}
 		/* 设置包路径和需要扫描的包 */
@@ -156,7 +156,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是Header参数 */
 					String headerParam = target.getHeaderParams().get(header.value());
 					if (StringUtil.isBlank(headerParam)) {
-						throw new FistRuntimeException("Fist Encapsulation Header Parameter [{0}] Error", header.value());
+						throw new FistException("framework encapsulation header parameter [{0}] error", header.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, headerParam.getClass()).convert(headerParam, targetType));
@@ -169,7 +169,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是Query参数 */
 					Object queryParam = target.getQueryParams().get(query.value());
 					if (queryParam == null) {
-						throw new FistRuntimeException("Fist Encapsulation Query Parameter [{0}] Error", query.value());
+						throw new FistException("framework encapsulation query parameter [{0}] error", query.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, queryParam.getClass()).convert(queryParam, targetType));
@@ -180,9 +180,9 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 				FistBody body = parameter.getDeclaredAnnotation(FistBody.class);
 				if (body != null) {
 					/* 注解不等于NULL表示参数是Body参数 */
-					Object bodyParam = target.getBodyParams().get(StringUtil.isBlank(body.value())?null:body.value());
+					Object bodyParam = target.getBodyParams().get(StringUtil.isBlank(body.value()) ? null : body.value());
 					if (bodyParam == null) {
-						throw new FistRuntimeException("Fist Encapsulation Body Parameter Error");
+						throw new FistException("framework encapsulation body parameter [{0}] error", body.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, bodyParam.getClass()).convert(bodyParam, targetType));
@@ -195,7 +195,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 注解不等于NULL表示参数是File参数 */
 					Object fileParam = target.getBodyParams().get(file.value());
 					if (fileParam == null) {
-						throw new FistRuntimeException("Fist Encapsulation File [{0}] Parameter Error", file.value());
+						throw new FistException("framework encapsulation file [{0}] parameter error", file.value());
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, fileParam.getClass()).convert(fileParam, targetType));
@@ -207,7 +207,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 					/* 参数是实体对象 */
 					Object queryParam = target.getQueryParams();
 					if (queryParam == null) {
-						throw new FistRuntimeException("Fist Encapsulation Entity Parameter Error");
+						throw new FistException("framework encapsulation entity parameter error");
 					} else {
 						/* 设置参数 */
 						params.add(FistConverterFactory.getConverter(targetType, queryParam.getClass()).convert(queryParam, targetType));
@@ -218,7 +218,7 @@ public class FistLocalProxy implements IFistProxy<FistTarget> {
 			if (IntegerUtil.isEq(parameters.length, params.size())) {
 				return method.invoke(entity, params.toArray());
 			} else {
-				throw new FistRuntimeException("Fist Converter {0}:{1} Error Because Parameter Number Error", entity.getClass().getTypeName(), method.getName());
+				throw new FistException("framework converter {0}:{1} error because parameter number error", entity.getClass().getTypeName(), method.getName());
 			}
 		} else {
 			/* 参数为空直接反射调用即可 */

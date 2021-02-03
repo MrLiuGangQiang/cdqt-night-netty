@@ -1,4 +1,4 @@
-package com.cdqt.netty.vess.targets;
+package com.cdqt.netty.vess.config.entity;
 
 import java.util.List;
 import java.util.Map;

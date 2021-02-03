@@ -252,7 +252,7 @@ public class FistResult<T> implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "ResultApi [code=" + code + ", data=" + data + ", msg=" + msg + "]";
+		return "[code=" + code + ", data=" + data + ", msg=" + msg + "]";
 	}
 
 }

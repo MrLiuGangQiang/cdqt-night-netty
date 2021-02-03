@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.cdqt.netty.base.codec.FistCodec;
+import com.cdqt.netty.base.exception.FistException;
 import com.cdqt.netty.vess.handler.http.FistHttpServerHandler;
 import com.cdqt.netty.vess.handler.tcp.FistTcpServerHandler;
 import com.cdqt.netty.vess.handler.udp.FistUdpServerHandler;
@@ -67,7 +68,7 @@ public class FistServerRegister {
 	public EventLoopGroup registerHttpServer(final String host, final int port) {
 		try {
 			if (port <= 0 || port > 65535) {
-				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
+				throw new FistException("register port should [0-65535] but this is " + port);
 			}
 			ServerBootstrap bootstrap = new ServerBootstrap();
 			/* 设置Reactor线程 */
@@ -91,12 +92,12 @@ public class FistServerRegister {
 			});
 			Channel channel = bootstrap.bind(host, port).sync().channel();
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("Register Http Server [{}:{}]", host, port);
+				LOGGER.info("register http server [{}:{}]", host, port);
 			}
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register Http Server [{}:{}] Error Message {}", host, port, e.toString());
+			LOGGER.error("register http server [{}:{}] error message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -112,7 +113,7 @@ public class FistServerRegister {
 	public EventLoopGroup registerTcpServer(final String host, final int port) {
 		try {
 			if (port <= 0 || port > 65535) {
-				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
+				throw new FistException("register port should [0-65535] but this is " + port);
 			}
 			ServerBootstrap bootstrap = new ServerBootstrap();
 			/* 设置Reactor线程 */
@@ -132,12 +133,12 @@ public class FistServerRegister {
 			});
 			Channel channel = bootstrap.bind(host, port).sync().channel();
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("Register Tcp Server [{}:{}]", host, port);
+				LOGGER.info("register tcp server [{}:{}]", host, port);
 			}
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register Tcp Server [{}:{}] Error Message {}", host, port, e.toString());
+			LOGGER.error("register tcp server [{}:{}] error message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -153,7 +154,7 @@ public class FistServerRegister {
 	public EventLoopGroup registerWebSocketServer(final String host, final int port) {
 		try {
 			if (port <= 0 || port > 65535) {
-				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
+				throw new FistException("register port should [0-65535] but this is " + port);
 			}
 			ServerBootstrap bootstrap = new ServerBootstrap();
 			/* 设置Reactor线程 */
@@ -177,12 +178,12 @@ public class FistServerRegister {
 			});
 			Channel channel = bootstrap.bind(host, port).sync().channel();
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("Register WebSocket Server [{}:{}]", host, port);
+				LOGGER.info("register websocket server [{}:{}]", host, port);
 			}
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register WebSocket Server [{}:{}] Error Message {}", host, port, e.toString());
+			LOGGER.error("register websocket server [{}:{}] error message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -198,7 +199,7 @@ public class FistServerRegister {
 	public EventLoopGroup registerUdpServer(final String host, final int port) {
 		try {
 			if (port <= 0 || port > 65535)
-				throw new IllegalArgumentException("register port should [0-65535] but this is " + port);
+				throw new FistException("register port should [0-65535] but this is " + port);
 			Bootstrap bootstrap = new Bootstrap();
 			/* 设置Reactor线程 */
 			bootstrap.group(workerGroup);
@@ -216,12 +217,12 @@ public class FistServerRegister {
 			});
 			Channel channel = bootstrap.bind(host, port).sync().channel();
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("Register Udp Server [{}:{}]", host, port);
+				LOGGER.info("register udp server [{}:{}]", host, port);
 			}
 			channels.add(channel);
 			return bootstrap.config().group();
 		} catch (Exception e) {
-			LOGGER.error("Register Udp Server [{}:{}] Error Message {}", host, port, e.toString());
+			LOGGER.error("register udp server [{}:{}] error message {}", host, port, e.toString());
 		}
 		return null;
 	}
@@ -236,14 +237,14 @@ public class FistServerRegister {
 			try {
 				ch.closeFuture().sync();
 			} catch (InterruptedException e) {
-				LOGGER.error("Fist Vess Start UP Error {}", e.toString());
+				LOGGER.error("vess start up error {}", e.toString());
 			} finally {
 				/* 优雅处理异常退出 */
 				try {
 					bossGroup.shutdownGracefully().sync();
 					workerGroup.shutdownGracefully().sync();
 				} catch (InterruptedException e) {
-					LOGGER.error("Fist Shutdown Error Message {}", e.toString());
+					LOGGER.error("shutdown error message {}", e.toString());
 				}
 			}
 		}

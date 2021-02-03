@@ -11,8 +11,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.cdqt.netty.base.result.FistResult;
 import com.cdqt.netty.base.result.FistStatus;
+import com.cdqt.netty.vess.config.entity.FistTarget;
 import com.cdqt.netty.vess.proxy.FistCall;
-import com.cdqt.netty.vess.targets.FistTarget;
 import com.cdqt.netty.vess.tools.http.request.FistHttpRequest;
 import com.cdqt.netty.vess.tools.http.response.FistHttpResponse;
 import com.cdqt.netty.vess.tools.http.uri.FistHttpUri;
@@ -50,7 +50,7 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		StringWriter sw = new StringWriter();
 		cause.printStackTrace(new PrintWriter(sw, true));
 		if (LOGGER.isErrorEnabled()) {
-			LOGGER.error("Http Server Happen Error [{}]", sw.getBuffer().toString());
+			LOGGER.error("http server happen error [{}]", sw.getBuffer().toString());
 		}
 		/* 出现异常统一处理并输出 */
 		FistResult<?> result = new FistResult<>(FistStatus.ERROR).setMsg(cause.toString());
@@ -74,7 +74,6 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 			FullHttpResponse response = FistHttpResponse.getInstance().outJson(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR, Unpooled.wrappedBuffer(resultStr.getBytes()));
 			ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 		}
-		// FIXME 这里需要校验服务是否一致
 		/* 获取目标服务和方法 */
 		String[] uris = uri.substring(1).split("/");
 		String[] targets = uris[1].split("[.]");

@@ -54,7 +54,7 @@ public class FistCodec extends ByteToMessageCodec<FistProtocol> {
 		in.readBytes(data);
 		FistProtocol protocol = new FistProtocol(data.length, data);
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("<< Fist Decode ByteBuf To FistProtocol Message {}", protocol.toString());
+			LOGGER.debug("<< fist decode bytebuf to fistprotocol message {}", protocol.toString());
 		}
 		out.add(protocol);
 	}
@@ -65,7 +65,7 @@ public class FistCodec extends ByteToMessageCodec<FistProtocol> {
 		out.writeInt(protocol.getLength());
 		out.writeBytes(protocol.getContent());
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug(">> Fist Encode FistProtocol To ByteBuf Message {}", protocol.toString());
+			LOGGER.debug(">> fist encode fistprotocol to bytebuf message {}", protocol.toString());
 		}
 	}
 }

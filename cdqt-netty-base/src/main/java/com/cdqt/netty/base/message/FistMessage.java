@@ -96,7 +96,7 @@ public class FistMessage implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "FistMessage [serial=" + serial + ", type=" + type + "]";
+		return "[serial=" + serial + ", type=" + type + "]";
 	}
 
 }

@@ -5,8 +5,7 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.cdqt.netty.base.exception.FistException;
 
 /**
  * 国际化资源文件操作类
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
  * @author LiuGangQiang Create in 2020/03/01
  */
 public abstract class FistPrompt {
-	private static final Logger LOGGER = LoggerFactory.getLogger(FistPrompt.class);
 	/**
 	 * 默认资源文件路径 默认值为 {@value}
 	 *
@@ -150,11 +148,8 @@ public abstract class FistPrompt {
 				return value;
 			}
 		} catch (UnsupportedEncodingException e) {
-			if (LOGGER.isErrorEnabled()) {
-				LOGGER.error("Resource Bundle Get Bundle Message Error path={} locale={} key={} args={}", path, locale, key, arguments);
-			}
+			throw new FistException("resource bundle get bundle message error path={0} locale={1} key={2} args={3}", path, locale, key, arguments);
 		}
-		return null;
 	}
 
 	/**

@@ -2,7 +2,7 @@ package com.cdqt.netty.vess.converters;
 
 import java.lang.reflect.Type;
 
-import com.cdqt.netty.base.exception.FistRuntimeException;
+import com.cdqt.netty.base.exception.FistException;
 
 /**
  * DefaultConverter
@@ -43,7 +43,7 @@ public class DefaultConverter implements IFistGenericConverter<Object> {
 	@Override
 	public Object convert(Object source, Type targetType) {
 		if (source.getClass() != targetType) {
-			throw new FistRuntimeException("Fist Converter {0} Error Because Type Error", targetType);
+			throw new FistException("fist converter [{0}] error because type error", targetType);
 		}
 		return source;
 	}

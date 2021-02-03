@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.cdqt.netty.vess.config.entity.BizConfig;
+import com.cdqt.netty.vess.config.entity.FistTarget;
 import com.cdqt.netty.vess.config.helper.BizConfigHelper;
 import com.cdqt.netty.vess.config.helper.BizType;
 import com.cdqt.netty.vess.proxy.http.FistHttpProxy;
@@ -11,7 +12,6 @@ import com.cdqt.netty.vess.proxy.local.FistLocalProxy;
 import com.cdqt.netty.vess.proxy.tcp.FistTcpProxy;
 import com.cdqt.netty.vess.proxy.udp.FistUdpProxy;
 import com.cdqt.netty.vess.proxy.websocket.FistWebsocketProxy;
-import com.cdqt.netty.vess.targets.FistTarget;
 
 /**
  * 代理调用工具类
@@ -82,7 +82,7 @@ public class FistCall {
 			return FistWebsocketProxy.getInstance().call(target);
 		default:
 			/* 未定义的调用方式 */
-			LOGGER.warn("The Call Cannot Continue Because BizConfig [{}] Config Error", target.getBizName());
+			LOGGER.warn("the call cannot continue because bizconfig [{}] config error", target.getBizName());
 			return null;
 		}
 	}

@@ -1,7 +1,7 @@
 package com.cdqt.netty.vess.proxy.tcp;
 
+import com.cdqt.netty.vess.config.entity.FistTarget;
 import com.cdqt.netty.vess.proxy.IFistProxy;
-import com.cdqt.netty.vess.targets.FistTarget;
 
 /**
  * TCP代理工具
@@ -42,11 +42,10 @@ public class FistTcpProxy implements IFistProxy<FistTarget> {
 	}
 
 	/**
-	 * @see com.cdqt.netty.vess.proxy.IFistProxy#call(com.cdqt.netty.vess.targets.FistTarget) 
+	 * @see com.cdqt.netty.vess.proxy.IFistProxy#call(com.cdqt.netty.vess.config.entity.FistTarget) 
 	 */
 	@Override
 	public Object call(FistTarget target) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -33,7 +33,7 @@ public class FistWebSocketServerHandler extends SimpleChannelInboundHandler<Text
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		/* 发生异常 打印日志并关闭连接 */
 		if (LOGGER.isErrorEnabled()) {
-			LOGGER.error("Web Socket Server Happen Error [{}]", cause.toString());
+			LOGGER.error("web socket server happen error [{}]", cause.toString());
 		}
 		ctx.close();
 	}

@@ -32,7 +32,7 @@ public class FistUdpServerHandler extends SimpleChannelInboundHandler<FistProtoc
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		/* 发生异常 打印日志并关闭连接 */
 		if (LOGGER.isErrorEnabled()) {
-			LOGGER.error("Udp Server Happen Error [{}]", cause.toString());
+			LOGGER.error("udp server happen error [{}]", cause.toString());
 		}
 		ctx.close();
 	}

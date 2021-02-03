@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cdqt.netty.base.exception.FistException;
 import com.cdqt.netty.tool.json.JsonFileUtil;
 import com.cdqt.netty.vess.config.entity.BizConfig;
 import com.cdqt.netty.vess.config.entity.SvrConfig;
@@ -66,10 +67,10 @@ public class BizConfigHelper {
 		List<BizConfig> bizConfigList = JSONObject.parseArray(bizConfigStr, BizConfig.class);
 		bizConfigList.forEach(biz -> {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Read {} Configuration [{}]", BIZ_CONFIG_PATH, biz);
+				LOGGER.debug("read {} configuration [{}]", BIZ_CONFIG_PATH, biz);
 			}
 			if (bizConfigMap.containsKey(biz.getId())) {
-				throw new RuntimeException("Server Configuration " + biz.getId() + " Repeat");
+				throw new FistException("server configuration [{0}] repeat", biz.getId());
 			}
 			bizConfigMap.put(biz.getId(), biz);
 		});

@@ -1,4 +1,4 @@
-package com.cdqt.netty.tool.clazz;
+package com.cdqt.netty.vess.tools.clazz;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.cdqt.netty.base.exception.FistException;
 
 /**
  * 包扫描工具
@@ -16,7 +15,6 @@ import org.slf4j.LoggerFactory;
  * @author LiuGangQiang Create in 2021/01/29
  */
 public class ClassScanUtil {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClassScanUtil.class);
 
 	/**
 	 * 获取某个Jar包内Class
@@ -69,7 +67,7 @@ public class ClassScanUtil {
 			/* 要注意在最后关闭资源 */
 			jar.close();
 		} catch (IOException e) {
-			LOGGER.error("Fist Load Jar Error {}", e.getMessage());
+			throw new FistException("framework load jar error {0}", e.getMessage());
 		}
 		return classs;
 	}
