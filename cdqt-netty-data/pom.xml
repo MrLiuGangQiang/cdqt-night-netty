@@ -7,6 +7,13 @@
     <version>1.1.1.20200605.RELEASE</version>
   </parent>
   <artifactId>cdqt-netty-data</artifactId>
+
+  <properties>
+    <hikaricp.version>3.3.0</hikaricp.version>
+    <mysql.version>8.0.16</mysql.version>
+    <spring.version>5.2.13.RELEASE</spring.version>
+    <mybatis.version>3.5.6</mybatis.version>
+  </properties>
   <!-- dependencies settings -->
   <dependencies>
     <!-- cdqt-night-base -->
@@ -20,11 +27,44 @@
       <artifactId>cdqt-netty-tool</artifactId>
       <version>1.1.1.20200605.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>${hikaricp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
   </dependencies>
 
   <!-- project build settings -->
   <build>
     <!-- final name -->
     <finalName>cdqt-netty-data</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
 </project>
