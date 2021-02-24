@@ -11,7 +11,7 @@
         <property name="username" value="cdqt" />
         <property name="password" value="123456" />
         <property name="autoCommit" value="false" />
-        <property name="minimumIdle" value="0" />
+        <property name="minimumIdle" value="1" />
         <property name="maximumPoolSize" value="2" />
         <property name="maxLifetime" value="60000" />
         <property name="idleTimeout" value="1800000" />
