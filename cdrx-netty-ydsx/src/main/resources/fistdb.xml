@@ -1,25 +1,57 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC" />
-      <dataSource type="com.cdqt.netty.data.pool.HikariCPDataSourceFactory" >
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="poolName" value="fistpool" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/cdqt?useUnicode=true&amp;characterEncoding=utf8&amp;mysqlEncoding=utf8&amp;autoReconnect=true&amp;serverTimezone=GMT%2B8" />
-        <property name="username" value="cdqt" />
-        <property name="password" value="123456" />
-        <property name="autoCommit" value="false" />
-        <property name="minimumIdle" value="1" />
-        <property name="maximumPoolSize" value="2" />
-        <property name="maxLifetime" value="60000" />
-        <property name="idleTimeout" value="1800000" />
-        <property name="connectionTestQuery" value="select 1" />
-      </dataSource>
-    </environment>
-  </environments>
-  <mappers>
-    <package name="com.cdrx.netty.ydsx.mapper" />
-  </mappers>
-</configuration>
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd 
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context.xsd">
+  <!-- 1) 获得数据库连接池对象，并交由 spring 同一管理 -->
+  <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+    <!-- 连接数据库的驱动，连接字符串，用户名和登录密码 -->
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+    <property name="poolName" value="fistpool" />
+    <property name="jdbcUrl" value="jdbc:mysql://192.168.1.4:3306/cdqt?useUnicode=true&amp;characterEncoding=utf8&amp;mysqlEncoding=utf8&amp;autoReconnect=true&amp;serverTimezone=GMT%2B8" />
+    <property name="username" value="cdqt" />
+    <property name="password" value="123456" />
+    <property name="autoCommit" value="false" />
+    <property name="minimumIdle" value="1" />
+    <property name="maximumPoolSize" value="10" />
+    <property name="maxLifetime" value="60000" />
+    <property name="idleTimeout" value="1800000" />
+    <property name="connectionTestQuery" value="select 1" />
+  </bean>
+
+  <!-- 2) 获取 SqlSessionFactory 对象，并交由 spring 管理 -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- 注入连接池 给 sqlsessionFactory 的属性 dataSource 赋值 ref="引用该 spring容器 中的另一个 bean的id" -->
+    <property name="dataSource" ref="dataSource" />
+    <!-- 配置mybatis的默认选项 -->
+    <property name="configuration" ref="configuration" />
+    <!-- 注意其他配置 -->
+    <property name="plugins">
+      <array>
+        <bean class="com.github.pagehelper.PageInterceptor">
+          <property name="properties">
+            <!--使用下面的方式配置参数，一行配置一个 -->
+            <value>
+              <!-- 分页合理化 -->
+              reasonable=true
+              supportMethodsArguments=true
+              params=count=countSql
+              autoRuntimeDialect=true
+            </value>
+          </property>
+        </bean>
+      </array>
+    </property>
+  </bean>
+  <!-- mybatis默认选项配置 -->
+  <bean id="configuration" class="org.apache.ibatis.session.Configuration">
+    <property name="callSettersOnNulls" value="true" />
+  </bean>
+  <!-- 3) 搜索有哪些 mapper 实现类，把mapper接口自动配置成 spring 中的 <bean> -->
+  <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <!-- name="basePackage":(起始)包名, 从这个包开始扫描 -->
+    <property name="basePackage" value="com.cdrx.netty.ydsx.mapper" />
+  </bean>
+</beans>
