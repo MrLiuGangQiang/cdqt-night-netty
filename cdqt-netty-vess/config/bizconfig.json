@@ -9,6 +9,16 @@
 		],
 		"isergodic": true,
 		"version": "v1"
+	},	{
+		"id": "userbiz",
+		"note": "本地调用",
+		"type": "local",
+		"jar": "cdrx-netty-ydsx.jar",
+		"pcks": [
+			"com.cdrx.netty.ydsx.controller"
+		],
+		"isergodic": true,
+		"version": "v1"
 	},
 	{
 		"id": "remotebiz",

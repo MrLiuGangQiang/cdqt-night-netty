@@ -86,5 +86,6 @@
     <module>cdqt-netty-data</module>
     <module>cdqt-netty-tool</module>
     <module>cdqt-netty-vess</module>
+    <module>cdrx-netty-ydsx</module>
   </modules>
 </project>

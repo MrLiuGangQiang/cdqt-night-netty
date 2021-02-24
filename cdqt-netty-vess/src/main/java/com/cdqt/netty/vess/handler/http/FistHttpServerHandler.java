@@ -1,5 +1,7 @@
 package com.cdqt.netty.vess.handler.http;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URLDecoder;
 
 import org.slf4j.Logger;
@@ -45,11 +47,11 @@ public class FistHttpServerHandler extends SimpleChannelInboundHandler<FullHttpR
 	 */
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		/*
-		 * StringWriter sw = new StringWriter(); cause.printStackTrace(new PrintWriter(sw, true));
-		 */
+
+		StringWriter sw = new StringWriter();
+		cause.printStackTrace(new PrintWriter(sw, true));
 		if (LOGGER.isErrorEnabled()) {
-			LOGGER.error("http server happen error : {}", cause.getMessage());
+			LOGGER.error("http server happen error : {}", sw.toString());
 		}
 		/* 出现异常统一处理并输出 */
 		FistResult<?> result = new FistResult<>(FistStatus.ERROR).setMsg(cause.getMessage());
