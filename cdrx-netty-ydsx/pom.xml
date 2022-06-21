@@ -9,7 +9,7 @@
   <artifactId>cdrx-netty-ydsx</artifactId>
 
   <properties>
-    <mysql.version>8.0.16</mysql.version>
+    <mysql.version>8.0.28</mysql.version>
     <pagehelper.version>5.2.0</pagehelper.version>
   </properties>
   <!-- dependencies settings -->
